@@ -34,7 +34,20 @@
                     alert("Please upload a valid CSV file.");
                 }
             });
+
+            $("#uploadSampleData").bind("click", function () {
+
+                container = $("#dvCSV");
+                container.html('');
+                rowdata = ["VTI,100", "VEA,100", "VWO,100"];
+                makeTable(container, rowdata);
+                updateQuotes();
+                updateQuotes_updates();
+
+            });
         });
+
+
 
         function makeTable(container, rowdata) {
 
@@ -203,6 +216,7 @@
 
     <input type="file" id="fileUpload" />
     <input type="button" id="upload" value="Upload" />
+    <input type="button" id="uploadSampleData" value="Upload sample data" />
     <hr />
     <div id="dvCSV">
     </div>
