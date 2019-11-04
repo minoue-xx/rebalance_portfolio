@@ -16,7 +16,6 @@ $(function () {
                     fillTableWithData(container, rowdata);
                     updateQuotes();
                     updateQuotes_updates();
-
                 }
                 reader.readAsText($("#fileUpload")[0].files[0]);
             } else {
@@ -33,13 +32,12 @@ $(function () {
         container.html('');
         //let rowdata = ["VTI,100", "VEA,100", "VWO,100"];
         //let rowdata = ["VTI,124", "VYM,98", "VEA,371", "VWO,177", "GLD,48", "AGG,64", "XLRE,90"];
-        let rowdata = ["VTI,124,0.28", "VYM,98,0.13", "VEA,371,0.23", "VWO,177,0.11", "GLD,48,0.10", "AGG,64,0.10", "XLRE,90,0.05"];
+        let rowdata = ["VTI,124,28.0", "VYM,98,13.0", "VEA,371,23.0", "VWO,177,11.0", "GLD,48,10.0", "AGG,64,10.0", "XLRE,90,5.0"];
 
         makeEmptyTable(container, rowdata.length);
         fillTableWithData(container, rowdata);
         updateQuotes();
         updateQuotes_updates();
-
     });
 
     $("#addrow").bind("click", function () {

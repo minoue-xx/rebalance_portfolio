@@ -66,8 +66,27 @@ function makeEmptyTable(container, nBodyRows) {
     col.append(input);
     row.append(col);
 
-    row.append($("<td/>").text(""));
-    row.append($("<td/>").text(""));
+    col = $("<td/>");
+    input = $("<input/>");
+    input.attr('type', 'text');
+    input.attr('value', '');
+
+    input.attr('class', 'totactual');
+    input.attr('name', 'totactual');
+
+    col.append(input);
+    row.append(col);
+
+    col = $("<td/>");
+    input = $("<input/>");
+    input.attr('type', 'text');
+    input.attr('value', '');
+
+    input.attr('class', 'tottarget');
+    input.attr('name', 'tottarget');
+
+    col.append(input);
+    row.append(col);
 
     col = $("<td/>");
     input = $("<input/>");
