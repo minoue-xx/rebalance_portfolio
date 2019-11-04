@@ -1,6 +1,20 @@
-function makeTable(container, rowdata) {
-
+function fillTableWithData(container, rowdata) {
     rowdata = rowdata.filter(word => word.length > 1);
+
+    let $tblrows = $("#tblTickers tbody tr");
+    $tblrows.each(function (index) {
+        var $tblrow = $(this);
+
+        cells = rowdata[index].split(",");
+        cells = cells.filter(word => word.length > 1);
+
+        $tblrow.find('.ticker').val(cells[0]);
+        $tblrow.find('.qty').val(cells[1]);
+        $tblrow.find('.target').val(cells[2]);
+    });
+}
+
+function makeEmptyTable(container, nBodyRows) {
 
     var table = $("<table/>");
     table.attr('id', 'tblTickers');
@@ -16,104 +30,23 @@ function makeTable(container, rowdata) {
     table.append(thead);
 
     var tbody = $("<tbody/>");
-    $.each(rowdata, function (rowIndex, r) {
+
+    let classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
+
+    for (var i = 0; i < nBodyRows; i++) {
         var row = $("<tr/>");
-        var cells = rowdata[rowIndex].split(",");
-
-        //let classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
-        let classes1 = ["ticker", "qty", "price"];
-        cells = cells.filter(word => word.length > 1);
-        $.each(classes1, function (colIndex) {
+        $.each(classes, function (colIndex) {
             var col = $("<td/>");
             var input = $("<input/>");
             input.attr('type', 'text');
-            input.attr('value', cells[colIndex]);
-            input.attr('class', classes1[colIndex]);
-            input.attr('name', classes1[colIndex]);
-            col.append(input);
-            row.append(col);
-        });
-
-        let classes2 = ["subtot", "actual", "target", "diff"];
-        $.each(classes2, function (colIndex) {
-            var col = $("<td/>");
-            var input = $("<input/>");
-            input.attr('type', 'text');
-            input.attr('class', classes2[colIndex]);
-            input.attr('name', classes2[colIndex]);
+            input.attr('class', classes[colIndex]);
+            input.attr('name', classes[colIndex]);
             col.append(input);
             row.append(col);
         });
         tbody.append(row);
-    });
-    table.append(tbody);
+    }
 
-
-    var tfoot = $("<tfoot/>");
-    var row = $("<tr/>");
-    row.append($("<td/>").text(""));
-    row.append($("<td/>").text(""));
-    row.append($("<td/>").text(""));
-
-    var col = $("<td/>");
-    var input = $("<input/>");
-    input.attr('type', 'text');
-    input.attr('value', '');
-
-    input.attr('class', 'grdtot');
-    input.attr('name', 'grdtor');
-
-    col.append(input);
-    row.append(col);
-
-    row.append($("<td/>").text(""));
-    row.append($("<td/>").text(""));
-
-    col = $("<td/>");
-    input = $("<input/>");
-    input.attr('type', 'text');
-    input.attr('value', '');
-
-    input.attr('class', 'grddiff');
-    input.attr('name', 'grddiff');
-
-    col.append(input);
-    row.append(col);
-
-    tfoot.append(row);
-    table.append(tfoot);
-
-    return container.append(table);
-}
-
-function makeEmptyTable(container) {
-
-    var table = $("<table/>");
-    table.attr('id', 'tblTickers');
-    var thead = $("<thead/>");
-    var row = $("<tr/>");
-
-    let names = ["Ticker", "Quantity", "Price", "Sub-Total", "Actual%", "Target%", "Diff%"];
-
-    $.each(names, function (index, value) {
-        row.append($("<td/>").text(value));
-    });
-    thead.append(row);
-    table.append(thead);
-
-    var tbody = $("<tbody/>");
-    var row = $("<tr/>");
-    let classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
-    $.each(classes, function (colIndex) {
-        var col = $("<td/>");
-        var input = $("<input/>");
-        input.attr('type', 'text');
-        input.attr('class', classes[colIndex]);
-        input.attr('name', classes[colIndex]);
-        col.append(input);
-        row.append(col);
-    });
-    tbody.append(row);
     table.append(tbody);
 
     var tfoot = $("<tfoot/>");
