@@ -4,7 +4,7 @@ function updateQuotes_updates() {
         var $tblrow = $(this);
 
         $tblrow.find('.qty').on('change', function () {
-
+            alert('qty change detected');
             var qty = $tblrow.find("[name=qty]").val();
             var price = $tblrow.find("[name=price]").val();
             var subTotal = parseInt(qty, 10) * parseFloat(price);
@@ -18,15 +18,16 @@ function updateQuotes_updates() {
                     grandTotal += isNaN(stval) ? 0 : stval;
                 });
                 $('.grdtot').val(grandTotal.toFixed(2));
-                alert('getJSON request succeeded!');
             } else {
                 $tblrow.find('.subtot').val('NaN');
                 $('.grdtot').val('NaN');
             }
+
+            alert('subtotal,grdtotal updated');
         });
 
         $tblrow.find('.ticker').on('change', function () {
-
+            alert('ticker change detected');
             var qty = $tblrow.find("[name=qty]").val();
             var price = $tblrow.find("[name=price]").val();
             var subTotal = parseInt(qty, 10) * parseFloat(price);
@@ -106,3 +107,74 @@ function updateQuotes() {
         });
     });
 }
+
+function updateQuotes_updatesbyRow($tblrow) {
+
+    $tblrow.find('.qty').on('change', function () {
+        alert('qty change detected');
+        var qty = $tblrow.find("[name=qty]").val();
+        var price = $tblrow.find("[name=price]").val();
+        var subTotal = parseInt(qty, 10) * parseFloat(price);
+        if (!isNaN(subTotal)) {
+
+            $tblrow.find('.subtot').val(subTotal.toFixed(2));
+
+            var grandTotal = 0;
+            $(".subtot").each(function () {
+                var stval = parseFloat($(this).val());
+                grandTotal += isNaN(stval) ? 0 : stval;
+            });
+            $('.grdtot').val(grandTotal.toFixed(2));
+        } else {
+            $tblrow.find('.subtot').val('NaN');
+            $('.grdtot').val('NaN');
+        }
+
+        alert('subtotal,grdtotal updated');
+    });
+
+    $tblrow.find('.ticker').on('change', function () {
+        alert('ticker change detected');
+        var qty = $tblrow.find("[name=qty]").val();
+        var price = $tblrow.find("[name=price]").val();
+        var subTotal = parseInt(qty, 10) * parseFloat(price);
+
+        var ticker = $tblrow.find("[name=ticker]").val();
+        var qty = $tblrow.find("[name=qty]").val();
+
+        var url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
+
+        $.getJSON(url, function (data) {
+
+            var price = data.price;
+            if (price) {
+
+                console.log(price.toString());
+                $tblrow.find('.price').val(price.toFixed(2));
+
+                var subTotal = parseInt(qty, 10) * parseFloat(price);
+
+                if (!isNaN(subTotal)) {
+
+                    $tblrow.find('.subtot').val(subTotal.toFixed(2));
+
+                    var grandTotal = 0;
+                    $(".subtot").each(function () {
+                        var stval = parseFloat($(this).val());
+                        grandTotal += isNaN(stval) ? 0 : stval;
+                    });
+                    $('.grdtot').val(grandTotal.toFixed(2));
+                    alert('getJSON request succeeded!');
+                } else {
+                    $tblrow.find('.subtot').val('NaN');
+                    $('.grdtot').val('NaN');
+                }
+            } else {
+                $tblrow.find('.price').val('NaN');
+                $tblrow.find('.subtot').val('NaN');
+                $('.grdtot').val('NaN');
+                alert('getJSON request failed!');
+            }
+        });
+    });
+};

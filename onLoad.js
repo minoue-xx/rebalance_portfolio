@@ -8,7 +8,7 @@ $(function () {
 
                     var rowdata = e.target.result.split("\n");
 
-                    container = $("#dvCSV");
+                    let container = $("#dvCSV");
                     container.html('');
                     makeTable(container, rowdata);
                     updateQuotes();
@@ -26,9 +26,9 @@ $(function () {
 
     $("#uploadSampleData").bind("click", function () {
 
-        container = $("#dvCSV");
+        let container = $("#dvCSV");
         container.html('');
-        rowdata = ["VTI,100", "VEA,100", "VWO,100"];
+        let rowdata = ["VTI,100", "VEA,100", "VWO,100"];
         makeTable(container, rowdata);
         updateQuotes();
         updateQuotes_updates();
@@ -37,8 +37,21 @@ $(function () {
 
     $("#addrow").bind("click", function () {
 
-        appendTableRow(container)
-        updateQuotes_updates();
+        let container = $("#dvCSV");
+
+        if (container.html().length == 0) {
+            makeEmptyTable(container);
+            updateQuotes_updates();
+        } else {
+            appendLastRow(container);
+        }
+
+    });
+
+    $("#deleterow").bind("click", function () {
+
+        let container = $("#dvCSV");
+        deleteLastRow(container)
 
     });
 });
