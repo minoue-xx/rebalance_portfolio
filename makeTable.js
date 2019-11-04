@@ -179,6 +179,7 @@ function deleteLastRow(table) {
         alert('last is the only one')
     } else {
         $last.remove()
+        updateGrdTotal()
     }
 
 }
