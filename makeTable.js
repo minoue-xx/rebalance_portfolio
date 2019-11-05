@@ -1,19 +1,3 @@
-function fillTableWithData(container, rowdata) {
-    rowdata = rowdata.filter(word => word.length > 1);
-
-    let $tblrows = $("#tblTickers tbody tr");
-    $tblrows.each(function (index) {
-        let $tblrow = $(this);
-
-        cells = rowdata[index].split(",");
-        cells = cells.filter(word => word.length > 1);
-
-        $tblrow.find('.ticker').val(cells[0]);
-        $tblrow.find('.qty').val(cells[1]);
-        $tblrow.find('.target').val(cells[2]);
-    });
-}
-
 function makeEmptyTable(container, nBodyRows) {
 
     let table = $("<table/>");
@@ -103,6 +87,22 @@ function makeEmptyTable(container, nBodyRows) {
     table.append(tfoot);
 
     return container.append(table);
+}
+
+function fillTableWithData(container, rowdata) {
+    rowdata = rowdata.filter(word => word.length > 1);
+
+    let $tblrows = $("#tblTickers tbody tr");
+    $tblrows.each(function (index) {
+        let $tblrow = $(this);
+
+        cells = rowdata[index].split(",");
+        cells = cells.filter(word => word.length > 1);
+
+        $tblrow.find('.ticker').val(cells[0]);
+        $tblrow.find('.qty').val(cells[1]);
+        $tblrow.find('.target').val(cells[2]);
+    });
 }
 
 function appendLastRow(table) {
