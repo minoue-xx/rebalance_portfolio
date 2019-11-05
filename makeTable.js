@@ -1,11 +1,11 @@
-function makeEmptyTable(container, nBodyRows) {
+function makeEmptyTable(container, nBodyRows, names, classes, footclasses, idname) {
 
     let table = $("<table/>");
-    table.attr('id', 'tblTickers');
+    table.attr('id', idname);
 
     // Header
     let thead = $("<thead/>");
-    const names = ["Ticker", "Quantity", "Price", "Sub-Total", "Actual%", "Target%", "Diff%"];
+
     {
         let row = $("<tr/>");
         $.each(names, function (index, value) {
@@ -17,7 +17,7 @@ function makeEmptyTable(container, nBodyRows) {
 
     // Body
     let tbody = $("<tbody/>");
-    const classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
+
 
     for (let i = 0; i < nBodyRows; i++) {
         let row = $("<tr/>");
@@ -26,7 +26,6 @@ function makeEmptyTable(container, nBodyRows) {
             let input = $("<input/>");
             input.attr('type', 'text');
             input.attr('class', classes[colIndex]);
-            input.attr('name', classes[colIndex]);
             col.append(input);
             row.append(col);
         });
@@ -34,58 +33,24 @@ function makeEmptyTable(container, nBodyRows) {
     }
     table.append(tbody);
 
+
     // Footer
     let tfoot = $("<tfoot/>");
     {
         let row = $("<tr/>");
-        row.append($("<td/>").text(""));
-        row.append($("<td/>").text(""));
-        row.append($("<td/>").text(""));
-
-        let col = $("<td/>");
-        let input = $("<input/>");
-        input.attr('type', 'text');
-        input.attr('value', '');
-
-        input.attr('class', 'grdtot');
-        input.attr('name', 'grdtor');
-
-        col.append(input);
-        row.append(col);
-
-        col = $("<td/>");
-        input = $("<input/>");
-        input.attr('type', 'text');
-        input.attr('value', '');
-
-        input.attr('class', 'totactual');
-        input.attr('name', 'totactual');
-
-        col.append(input);
-        row.append(col);
-
-        col = $("<td/>");
-        input = $("<input/>");
-        input.attr('type', 'text');
-        input.attr('value', '');
-
-        input.attr('class', 'tottarget');
-        input.attr('name', 'tottarget');
-
-        col.append(input);
-        row.append(col);
-
-        col = $("<td/>");
-        input = $("<input/>");
-        input.attr('type', 'text');
-        input.attr('value', '');
-
-        input.attr('class', 'grddiff');
-        input.attr('name', 'grddiff');
-
-        col.append(input);
-        row.append(col);
-
+        let Nemtyfoot = classes.length - footclasses.length;
+        for (let ii = 0; ii < Nemtyfoot; ii++) {
+            row.append($("<td/>").text(""));
+        }
+        $.each(footclasses, function (colIndex) {
+            let col = $("<td/>");
+            let input = $("<input/>");
+            input.attr('type', 'text');
+            input.attr('value', '');
+            input.attr('class', footclasses[colIndex]);
+            col.append(input);
+            row.append(col);
+        });
         tfoot.append(row);
     }
     table.append(tfoot);
@@ -95,7 +60,7 @@ function makeEmptyTable(container, nBodyRows) {
 function fillTableWithData(container, rowdata) {
     rowdata = rowdata.filter(word => word.length > 1);
 
-    let $tblrows = $("#tblTickers tbody tr");
+    let $tblrows = $("#tblCurrent tbody tr");
     $tblrows.each(function (index) {
         let $tblrow = $(this);
 
@@ -109,17 +74,15 @@ function fillTableWithData(container, rowdata) {
 }
 
 function appendLastRow(table) {
-    var $tbody = table.find('tbody:last');
-    var lastRow = $('<tr/>').appendTo($tbody);
+    let $tbody = table.find('tbody:last');
+    let lastRow = $('<tr/>').appendTo($tbody);
 
-
-    var classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
+    const classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
     $.each(classes, function (colIndex, eachclass) {
-        var col = $("<td/>");
-        var input = $("<input/>");
+        let col = $("<td/>");
+        let input = $("<input/>");
         input.attr('type', 'text');
         input.attr('class', eachclass);
-        input.attr('name', eachclass);
         col.append(input);
         lastRow.append(col);
     });
@@ -128,13 +91,14 @@ function appendLastRow(table) {
 }
 
 function deleteLastRow(table) {
-    var $tbody = table.find('tbody:last');
-    var $last = $tbody.find('tr:last');
+    let $tbody = table.find('tbody:last');
+    let $last = $tbody.find('tr:last');
     if ($last.is(':first-child')) {
         alert('last is the only one')
     } else {
         $last.remove()
         updateGrdTotal()
+        updateActual()
     }
 
 }
