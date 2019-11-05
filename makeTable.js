@@ -3,7 +3,7 @@ function fillTableWithData(container, rowdata) {
 
     let $tblrows = $("#tblTickers tbody tr");
     $tblrows.each(function (index) {
-        var $tblrow = $(this);
+        let $tblrow = $(this);
 
         cells = rowdata[index].split(",");
         cells = cells.filter(word => word.length > 1);
@@ -16,10 +16,10 @@ function fillTableWithData(container, rowdata) {
 
 function makeEmptyTable(container, nBodyRows) {
 
-    var table = $("<table/>");
+    let table = $("<table/>");
     table.attr('id', 'tblTickers');
-    var thead = $("<thead/>");
-    var row = $("<tr/>");
+    let thead = $("<thead/>");
+    let row = $("<tr/>");
 
     let names = ["Ticker", "Quantity", "Price", "Sub-Total", "Actual%", "Target%", "Diff%"];
 
@@ -29,15 +29,15 @@ function makeEmptyTable(container, nBodyRows) {
     thead.append(row);
     table.append(thead);
 
-    var tbody = $("<tbody/>");
+    let tbody = $("<tbody/>");
 
     let classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
 
-    for (var i = 0; i < nBodyRows; i++) {
-        var row = $("<tr/>");
+    for (let i = 0; i < nBodyRows; i++) {
+        let row = $("<tr/>");
         $.each(classes, function (colIndex) {
-            var col = $("<td/>");
-            var input = $("<input/>");
+            let col = $("<td/>");
+            let input = $("<input/>");
             input.attr('type', 'text');
             input.attr('class', classes[colIndex]);
             input.attr('name', classes[colIndex]);
@@ -49,14 +49,14 @@ function makeEmptyTable(container, nBodyRows) {
 
     table.append(tbody);
 
-    var tfoot = $("<tfoot/>");
-    var row = $("<tr/>");
+    let tfoot = $("<tfoot/>");
+    let row = $("<tr/>");
     row.append($("<td/>").text(""));
     row.append($("<td/>").text(""));
     row.append($("<td/>").text(""));
 
-    var col = $("<td/>");
-    var input = $("<input/>");
+    let col = $("<td/>");
+    let input = $("<input/>");
     input.attr('type', 'text');
     input.attr('value', '');
 
@@ -106,8 +106,8 @@ function makeEmptyTable(container, nBodyRows) {
 }
 
 function appendLastRow(table) {
-    var $tbody = table.find('tbody:last');
-    var lastRow = $('<tr/>').appendTo($tbody);
+    let $tbody = table.find('tbody:last');
+    let lastRow = $('<tr/>').appendTo($tbody);
 
 
     let classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
@@ -125,8 +125,8 @@ function appendLastRow(table) {
 }
 
 function deleteLastRow(table) {
-    var $tbody = table.find('tbody:last');
-    var $last = $tbody.find('tr:last');
+    let $tbody = table.find('tbody:last');
+    let $last = $tbody.find('tr:last');
     if ($last.is(':first-child')) {
         alert('last is the only one')
     } else {

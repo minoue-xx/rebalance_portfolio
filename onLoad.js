@@ -1,12 +1,12 @@
 $(function () {
     $("#upload").bind("click", function () {
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+        let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
         if (regex.test($("#fileUpload").val().toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
-                var reader = new FileReader();
+                let reader = new FileReader();
                 reader.onload = function (e) {
 
-                    var rowdata = e.target.result.split("\n");
+                    let rowdata = e.target.result.split("\n");
                     rowdata = rowdata.filter(word => word.length > 1);
 
                     let container = $("#dvCSV");

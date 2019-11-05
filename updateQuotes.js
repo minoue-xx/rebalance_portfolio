@@ -1,9 +1,9 @@
 function updateGrdTotal() {
 
-    var curr = parseFloat($('.grdtot').val());
-    var grandTotal = 0;
+    let curr = parseFloat($('.grdtot').val());
+    let grandTotal = 0;
     $(".subtot").each(function () {
-        var stval = parseFloat($(this).val());
+        let stval = parseFloat($(this).val());
         grandTotal += isNaN(stval) ? 0 : stval;
     });
 
@@ -15,15 +15,15 @@ function updateGrdTotal() {
 function updateActual() {
 
 
-    var totactual = 0;
-    var tottarget = 0;
-    var totdiff = 0;
+    let totactual = 0;
+    let tottarget = 0;
+    let totdiff = 0;
 
-    var grdtotal = $('.grdtot').val();
+    let grdtotal = $('.grdtot').val();
 
     let ratio = [];
     $(".subtot").each(function (index) {
-        var stval = parseFloat($(this).val());
+        let stval = parseFloat($(this).val());
         subTotal = isNaN(stval) ? 0 : stval;
         ratio.push(subTotal / grdtotal * 100);
     });
@@ -31,13 +31,13 @@ function updateActual() {
 
     $(".actual").each(function (index) {
         $(this).val(ratio[index].toFixed(2));
-        var stval = parseFloat($(this).val());
+        let stval = parseFloat($(this).val());
         totactual += ratio[index];
     });
 
     let ratiodiff = ratio;
     $(".target").each(function (index) {
-        var stval = parseFloat($(this).val());
+        let stval = parseFloat($(this).val());
         tottarget += isNaN(stval) ? 0 : stval;
         ratiodiff[index] = ratio[index] - stval;
     });
@@ -57,9 +57,9 @@ function updateActual() {
 function hogehoge_qty($tblrow) {
 
     alert('qty change detected');
-    var qty = $tblrow.find("[name=qty]").val();
-    var price = $tblrow.find("[name=price]").val();
-    var subTotal = parseInt(qty, 10) * parseFloat(price);
+    let qty = $tblrow.find("[name=qty]").val();
+    let price = $tblrow.find("[name=price]").val();
+    let subTotal = parseInt(qty, 10) * parseFloat(price);
     if (!isNaN(subTotal)) {
 
         $tblrow.find('.subtot').val(subTotal.toFixed(2));
@@ -77,26 +77,26 @@ function hogehoge_qty($tblrow) {
 
 function hogehoge_ticker($tblrow) {
     alert('ticker change detected');
-    var qty = $tblrow.find("[name=qty]").val();
+    let qty = $tblrow.find("[name=qty]").val();
     if (qty == "") {
         $tblrow.find("[name=qty]").val(1);
         qty = 1;
     }
-    var price = $tblrow.find("[name=price]").val();
-    var subTotal = parseInt(qty, 10) * parseFloat(price);
-    var ticker = $tblrow.find("[name=ticker]").val();
+    let price = $tblrow.find("[name=price]").val();
+    let subTotal = parseInt(qty, 10) * parseFloat(price);
+    let ticker = $tblrow.find("[name=ticker]").val();
 
-    var url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
+    let url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
 
     $.getJSON(url, function (data) {
 
-        var price = data.price;
+        let price = data.price;
         if (price) {
 
             console.log(price.toString());
             $tblrow.find('.price').val(price.toFixed(2));
 
-            var subTotal = parseInt(qty, 10) * parseFloat(price);
+            let subTotal = parseInt(qty, 10) * parseFloat(price);
 
             if (!isNaN(subTotal)) {
 
@@ -121,7 +121,7 @@ function hogehoge_ticker($tblrow) {
 function updateQuotes_updates() {
     let $tblrows = $("#tblTickers tbody tr");
     $tblrows.each(function (index) {
-        var $tblrow = $(this);
+        let $tblrow = $(this);
 
         $tblrow.find('.qty').on('change', function () {
             hogehoge_qty($tblrow);
@@ -149,8 +149,8 @@ function updateQuotes() {
     $tblrows.each(function (index) {
         let $tblrow = $(this);
 
-        const ticker = $tblrow.find("[name=ticker]").val();
-        const qty = $tblrow.find("[name=qty]").val();
+        const ticker = $tblrow.find(".ticker").val();
+        const qty = $tblrow.find(".qty").val();
 
         let url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
 
