@@ -143,7 +143,7 @@ function updateQuotes_updatesbyRow($tblrow) {
 };
 
 function updateQuotes() {
-    $('.price, .subtot, .grdtot').prop('readonly', true);
+    $('.price, .subtot, .actual, .diff, .grdtot').prop('readonly', true);
     let $tblrows = $("#tblTickers tbody tr");
 
     $tblrows.each(function (index) {
