@@ -3,43 +3,43 @@ function updateVirtual() {
 
     let price = [];
     $(".price").each(function (index) {
-        price.push(parseFloat($(this).val()));
+        price.push(Number($(this).val().replace(/[^0-9.-]+/g, "")));
     });
 
     let qty = [];
     $(".qty").each(function (index) {
-        qty.push(parseFloat($(this).val()));
+        qty.push(Number($(this).val()));
     });
 
     let qty2add = [];
     $(".qty2add").each(function (index) {
-        qty2add.push(parseFloat($(this).val()));
+        qty2add.push(Number($(this).val()));
     });
 
     let totcost = 0;
     $(".cost").each(function (index) {
         tmp = qty2add[index] * price[index];
-        $(this).val(tmp);
+        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         totcost += tmp;
     });
     $('.totcost').val("$" + totcost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
     $(".subtot_v").each(function (index) {
         tmp = (qty2add[index] + qty[index]) * price[index];
-        $(this).val(tmp);
+        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     });
 
     let grandTotal = 0;
     $(".subtot_v").each(function () {
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         grandTotal += isNaN(stval) ? 0 : stval;
     });
-    $('.grdtot_v').val(grandTotal.toFixed(2));
+    $('.grdtot_v').val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
 
     let ratio = [];
     $(".subtot_v").each(function (index) {
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         subTotal = isNaN(stval) ? 0 : stval;
         ratio.push(subTotal / grandTotal * 100);
     });
@@ -47,14 +47,14 @@ function updateVirtual() {
     let totactual = 0;
     $(".actual_v").each(function (index) {
         $(this).val(ratio[index].toFixed(2));
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val());
         totactual += ratio[index];
     });
 
     let tottarget = 0;
     let ratiodiff = ratio;
     $(".target_v").each(function (index) {
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val());
         tottarget += isNaN(stval) ? 0 : stval;
         ratiodiff[index] = ratio[index] - stval;
     });
@@ -79,7 +79,6 @@ function updateGrdTotal() {
 
     let grandTotal = 0;
     $(".subtot").each(function () {
-        //let stval = parseFloat($(this).val());
         let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         grandTotal += isNaN(stval) ? 0 : stval;
     });
@@ -107,13 +106,13 @@ function updateActual() {
 
     $(".actual").each(function (index) {
         $(this).val(ratio[index].toFixed(2));
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val());
         totactual += ratio[index];
     });
 
     let ratiodiff = ratio;
     $(".target").each(function (index) {
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val());
         tottarget += isNaN(stval) ? 0 : stval;
         ratiodiff[index] = ratio[index] - stval;
     });
@@ -181,7 +180,9 @@ function hogehoge_ticker($tblrow) {
 
             $tblrow.find('.price').val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-            const subTotal = parseInt(qty, 10) * parseFloat(price);
+            console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+            console.log(price);
+            const subTotal = parseInt(qty, 10) * Number(price.toFixed(2));
 
             if (!isNaN(subTotal)) {
 
@@ -211,7 +212,6 @@ function updateQuotes_updates() {
             hogehoge_qty($tblrow);
         });
         $tblrow.find('.ticker').on('change', function () {
-
             alert('ticker change detected');
             hogehoge_ticker($tblrow);
         });

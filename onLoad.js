@@ -111,7 +111,8 @@ $(function () {
 
         // inputs
         // let cost = 2000;
-        const costBudget = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
+        var tmp = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
+        var cost = [tmp, 0, 0];
 
         var price = [155.83, 90.4, 42.78, 42.50, 142.56, 112.93, 39.23, 0, 0, 0];
         $(".price").each(function (index) {
@@ -120,26 +121,29 @@ $(function () {
 
         var position = [12, 20, 40, 15, 6, 18, 12, 0, 0, 0];
         $(".qty").each(function (index) {
-            position[index] = parseFloat($(this).val());
+            position[index] = Number($(this).val());
         });
 
         console.log(position);
         console.log(price);
         console.log(target_pf);
+        console.log(cost);
 
         // Create Data    
         var Target_pf = new Float64Array(target_pf);
         var Price = new Float64Array(price);
         var Position = new Float64Array(position);
+        var Cost = new Float64Array(cost);
         var Position2Add = new Float64Array(10);
         // Move Data to Heap
         var Target_pfbytes = _arrayToHeap(Target_pf);
         var Pricebytes = _arrayToHeap(Price);
         var Positionbytes = _arrayToHeap(Position);
+        var Costbytes = _arrayToHeap(Cost);
         var Position2Addbytes = _arrayToHeap(Position2Add);
         // Run Function
         _optimizeposition_initialize();
-        _getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, Position2Addbytes.byteOffset)
+        _getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, Costbytes.byteOffset, Position2Addbytes.byteOffset);
         _optimizeposition_terminate();
         //  Copy Data from Heap
         Position2Add = _heapToArray(Position2Addbytes, Position2Add);
