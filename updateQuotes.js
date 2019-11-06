@@ -22,7 +22,7 @@ function updateVirtual() {
         $(this).val(tmp);
         totcost += tmp;
     });
-    $('.totcost').val(totcost.toFixed(2));
+    $('.totcost').val("$" + totcost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
     $(".subtot_v").each(function (index) {
         tmp = (qty2add[index] + qty[index]) * price[index];
@@ -72,8 +72,6 @@ function updateVirtual() {
     $('.totactual_v').val(totactual.toFixed(2));
     $('.tottarget_v').val(tottarget.toFixed(2));
     $('.grddiff_v').val(totdiff.toFixed(2));
-
-
 }
 
 
@@ -81,13 +79,12 @@ function updateGrdTotal() {
 
     let grandTotal = 0;
     $(".subtot").each(function () {
-        let stval = parseFloat($(this).val());
+        //let stval = parseFloat($(this).val());
+        let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         grandTotal += isNaN(stval) ? 0 : stval;
     });
 
-    $('.grdtot').val(grandTotal.toFixed(2));
-
-
+    $('.grdtot').val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
 function updateActual() {
@@ -97,11 +94,12 @@ function updateActual() {
     let tottarget = 0;
     let totdiff = 0;
 
-    let grdtotal = $('.grdtot').val();
+    let grdtotal = Number($(".grdtot").val().replace(/[^0-9.-]+/g, ""));
+
 
     let ratio = [];
     $(".subtot").each(function (index) {
-        let stval = parseFloat($(this).val());
+        let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         subTotal = isNaN(stval) ? 0 : stval;
         ratio.push(subTotal / grdtotal * 100);
     });
@@ -150,10 +148,10 @@ function hogehoge_qty($tblrow) {
     alert('qty change detected');
     let qty = $tblrow.find(".qty").val();
     let price = $tblrow.find(".price").val();
-    let subTotal = parseInt(qty, 10) * parseFloat(price);
+    let subTotal = parseInt(qty, 10) * Number(price.replace(/[^0-9.-]+/g, ""));
     if (!isNaN(subTotal)) {
 
-        $tblrow.find('.subtot').val(subTotal.toFixed(2));
+        $tblrow.find('.subtot').val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         updateGrdTotal();
         updateActual();
 
@@ -167,31 +165,27 @@ function hogehoge_qty($tblrow) {
 }
 
 function hogehoge_ticker($tblrow) {
-    alert('ticker change detected');
     let qty = $tblrow.find(".qty").val();
     if (qty == "") {
         $tblrow.find(".qty").val(1);
         qty = 1;
     }
-    let price = $tblrow.find(".price").val();
-    let subTotal = parseInt(qty, 10) * parseFloat(price);
-    let ticker = $tblrow.find(".ticker").val();
 
-    let url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
+    const ticker = $tblrow.find(".ticker").val();
+    const url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
 
     $.getJSON(url, function (data) {
 
-        let price = data.price;
+        const price = data.price;
         if (price) {
 
-            console.log(price.toString());
-            $tblrow.find('.price').val(price.toFixed(2));
+            $tblrow.find('.price').val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-            let subTotal = parseInt(qty, 10) * parseFloat(price);
+            const subTotal = parseInt(qty, 10) * parseFloat(price);
 
             if (!isNaN(subTotal)) {
 
-                $tblrow.find('.subtot').val(subTotal.toFixed(2));
+                $tblrow.find('.subtot').val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
                 updateGrdTotal();
                 updateActual();
             } else {
@@ -207,7 +201,7 @@ function hogehoge_ticker($tblrow) {
     });
 }
 
-//https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows
+
 function updateQuotes_updates() {
     let $tblrows = $("#tblCurrent tbody tr");
     $tblrows.each(function (index) {
@@ -217,6 +211,8 @@ function updateQuotes_updates() {
             hogehoge_qty($tblrow);
         });
         $tblrow.find('.ticker').on('change', function () {
+
+            alert('ticker change detected');
             hogehoge_ticker($tblrow);
         });
         $tblrow.find('.target').on('change', function () {
@@ -231,6 +227,8 @@ function updateQuotes_updatesbyRow($tblrow) {
         hogehoge_qty($tblrow);
     });
     $tblrow.find('.ticker').on('change', function () {
+
+        alert('ticker change detected');
         hogehoge_ticker($tblrow);
     });
     $tblrow.find('.target').on('change', function () {
@@ -238,34 +236,14 @@ function updateQuotes_updatesbyRow($tblrow) {
     });
 };
 
-function updateQuotes() {
+function updateQuotes_initialize() {
     $('.price, .subtot, .actual, .diff, .grdtot').prop('readonly', true);
     let $tblrows = $("#tblCurrent tbody tr");
 
     $tblrows.each(function (index) {
         let $tblrow = $(this);
-
-        const ticker = $tblrow.find(".ticker").val();
-        const qty = $tblrow.find(".qty").val();
-
-        let url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
-
-        $.getJSON(url, function (data) {
-
-            const price = data.price;
-            console.log(price.toString());
-            $tblrow.find('.price').val(price.toFixed(2));
-
-            const subTotal = parseInt(qty, 10) * parseFloat(price);
-
-            if (!isNaN(subTotal)) {
-
-                $tblrow.find('.subtot').val(subTotal.toFixed(2));
-                updateGrdTotal();
-                updateActual();
-            }
-        });
-
+        hogehoge_ticker($tblrow)
     });
 }
+
 

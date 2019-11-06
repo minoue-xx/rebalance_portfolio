@@ -1,7 +1,16 @@
 <!--
-    https://www.aspsnippets.com/Articles/Read-CSV-File-in-jQuery-using-HTML5-File-API.aspx
+Read CSV File in jQuery using HTML5 File API
+https://www.aspsnippets.com/Articles/Read-CSV-File-in-jQuery-using-HTML5-File-API.aspx
+
+How to convert a currency string to a double with jQuery or Javascript? - Stack Overflow
+https://stackoverflow.com/questions/559112/how-to-convert-a-currency-string-to-a-double-with-jquery-or-javascript
+
+How can I format numbers as currency string in JavaScript? - Stack Overflow
+https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-currency-string-in-javascript
+
+Using jQuery to Perform Calculations in a Table
+https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows
 -->
-<!--row.append($("<td/>").text(cells[colIndex]));-->
 
 <head>
     <title>Rebalancing Portofolio (Under Development)</title>
@@ -9,11 +18,12 @@
 
 <body>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script async type="text/javascript" src="optimizeposition.js"></script>
-    <script async type="text/javascript" src="getPosition2Add.js"></script>
+    <script type="text/javascript" src="optimizeposition.js"></script>
+    <script type="text/javascript" src="getPosition2Add.js"></script>
     <script type="text/javascript" src="makeTable.js"></script>
     <script type="text/javascript" src="updateQuotes.js"></script>
     <script type="text/javascript" src='onLoad.js'></script>
+    <!--ref on async/defer/defaut: https://qiita.com/phanect/items/82c85ea4b8f9c373d684-->
 
     <input type="file" id="fileUpload" />
     <input type="button" id="upload" value="Upload" />
@@ -22,8 +32,13 @@
     <input type="button" id="deleterow" value="Delete the last row" />
     <input type="button" id="runfmincon" value="How many to add?" />
     <hr />
+    <p>Current Portofolio</p>
     <div id="dvCurrent"></div>
     <hr />
+    <p>Budget</p>
+    <div id="dvBudget"></div>
+    <hr />
+    <p>Virtual Portofolio</p>
     <div id="dvVirtual"></div>
     <hr />
 </body>

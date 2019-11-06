@@ -14,8 +14,11 @@ $(function () {
                     //makeTable(container, rowdata);
                     makeEmptyTable(container, rowdata.length);
                     fillTableWithData(container, rowdata);
-                    updateQuotes();
+                    updateQuotes_initialize();
                     updateQuotes_updates();
+
+                    let dvBudget = $("#dvBudget");
+                    dvBudget.html('<input type="text" class="budget" value="$2,000"/>')
                 }
                 reader.readAsText($("#fileUpload")[0].files[0]);
             } else {
@@ -42,9 +45,16 @@ $(function () {
         const footclasses = ["grdtot", "totactual", "tottarget", "grddiff"];
         makeEmptyTable(containerC, rowdata.length, names, classes, footclasses, "tblCurrent");
         fillTableWithData(containerC, rowdata);
-        updateQuotes();
+        updateQuotes_initialize();
         updateQuotes_updates();
 
+        let dvBudget = $("#dvBudget");
+        dvBudget.html('<input type="text" class="budget" value="$2,000"/>')
+
+        dvBudget.find('.budget').on('change', function () {
+            let budget = Number($(this).val().replace(/[^0-9.-]+/g, ""));
+            $(this).val("$" + budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        });
     });
 
     $("#addrow").bind("click", function () {
@@ -101,11 +111,11 @@ $(function () {
 
         // inputs
         // let cost = 2000;
-
+        const costBudget = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
 
         var price = [155.83, 90.4, 42.78, 42.50, 142.56, 112.93, 39.23, 0, 0, 0];
         $(".price").each(function (index) {
-            price[index] = parseFloat($(this).val());
+            price[index] = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         });
 
         var position = [12, 20, 40, 15, 6, 18, 12, 0, 0, 0];
