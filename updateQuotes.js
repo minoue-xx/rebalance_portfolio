@@ -135,11 +135,12 @@ function updateActual() {
 function hogehoge_target($tblrow) {
 
     alert('target change detected');
-    newFunction(); // WHY??
-
-    function newFunction() {
-        updateActual();
-    }
+    updateActual();
+    //   newFunction(); // WHY??
+    //
+    //  function newFunction() {
+    //    updateActual();
+    //}
 }
 
 function hogehoge_qty($tblrow) {
@@ -151,8 +152,14 @@ function hogehoge_qty($tblrow) {
     if (!isNaN(subTotal)) {
 
         $tblrow.find('.subtot').val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        updateGrdTotal();
-        updateActual();
+        let promise1 = new Promise(function (resolve, reject) {
+            updateGrdTotal();
+        });
+        promise1.then(function (value) {
+            updateActual();
+        })
+
+
 
     } else {
         $tblrow.find('.subtot').val('NaN');

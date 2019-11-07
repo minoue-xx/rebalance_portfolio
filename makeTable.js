@@ -99,6 +99,7 @@ function deleteLastRow(table) {
         $last.remove()
         updateGrdTotal()
         updateActual()
+
     }
 
 }
