@@ -113,6 +113,7 @@ $(function () {
         // let cost = 2000;
         var tmp = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
         var cost = [tmp, 0, 0];
+        var costs = tmp;
 
         var price = [155.83, 90.4, 42.78, 42.50, 142.56, 112.93, 39.23, 0, 0, 0];
         $(".price").each(function (index) {
@@ -143,7 +144,8 @@ $(function () {
         var Position2Addbytes = _arrayToHeap(Position2Add);
         // Run Function
         _optimizeposition_initialize();
-        _getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, Costbytes.byteOffset, Position2Addbytes.byteOffset);
+        //_getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, Costbytes.byteOffset, Position2Addbytes.byteOffset);
+        _getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, costs, Position2Addbytes.byteOffset);
         _optimizeposition_terminate();
         //  Copy Data from Heap
         Position2Add = _heapToArray(Position2Addbytes, Position2Add);
