@@ -1,4 +1,0 @@
-https://stackoverflow.com/questions/5150040/stock-quotes-with-javascript
-https://api.jquery.com/jQuery.getJSON/#jQuery-getJSON-url-data-success
-https://financialmodelingprep.com/developer/docs/#Stock-Price
-https://www.w3schools.com/jsref/jsref_tostring_number.asp
