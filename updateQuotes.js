@@ -1,6 +1,5 @@
 function updateVirtual() {
 
-
     let price = [];
     $(".price").each(function (index) {
         price.push(Number($(this).val().replace(/[^0-9.-]+/g, "")));
@@ -19,14 +18,14 @@ function updateVirtual() {
     let totcost = 0;
     $(".cost").each(function (index) {
         tmp = qty2add[index] * price[index];
-        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
         totcost += tmp;
     });
-    $('.totcost').val("$" + totcost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $(".totcost").val("$" + totcost.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
     $(".subtot_v").each(function (index) {
         tmp = (qty2add[index] + qty[index]) * price[index];
-        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $(this).val("$" + tmp.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
     });
 
     let grandTotal = 0;
@@ -34,7 +33,7 @@ function updateVirtual() {
         let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         grandTotal += isNaN(stval) ? 0 : stval;
     });
-    $('.grdtot_v').val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $(".grdtot_v").val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
 
     let ratio = [];
@@ -59,7 +58,7 @@ function updateVirtual() {
         ratiodiff[index] = ratio[index] - stval;
     });
     if (tottarget != 100) {
-        alert('Target% does not add up to 100%');
+        alert("Target% does not add up to 100%");
     }
 
     let totdiff = 0;
@@ -69,13 +68,12 @@ function updateVirtual() {
         totdiff += Math.pow(tmp, 2);
     });
 
-    $('.totactual_v').val(totactual.toFixed(2));
-    $('.tottarget_v').val(tottarget.toFixed(2));
-    $('.grddiff_v').val(totdiff.toFixed(2));
+    $(".totactual_v").val(totactual.toFixed(2));
+    $(".tottarget_v").val(tottarget.toFixed(2));
+    $(".grddiff_v").val(totdiff.toFixed(2));
 }
 
-
-function updateGrdTotal() {
+function updateTotalActual() {
 
     let grandTotal = 0;
     $(".subtot").each(function () {
@@ -83,24 +81,17 @@ function updateGrdTotal() {
         grandTotal += isNaN(stval) ? 0 : stval;
     });
 
-    $('.grdtot').val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-}
-
-function updateActual() {
-
+    $(".grdtot").val("$" + grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
     let totactual = 0;
     let tottarget = 0;
     let totdiff = 0;
 
-    let grdtotal = Number($(".grdtot").val().replace(/[^0-9.-]+/g, ""));
-
-
     let ratio = [];
     $(".subtot").each(function (index) {
         let stval = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         subTotal = isNaN(stval) ? 0 : stval;
-        ratio.push(subTotal / grdtotal * 100);
+        ratio.push(subTotal / grandTotal * 100);
     });
 
 
@@ -117,7 +108,7 @@ function updateActual() {
         ratiodiff[index] = ratio[index] - stval;
     });
     if (tottarget != 100) {
-        alert('Target% does not add up to 100%');
+        alert("Target% does not add up to 100%");
     }
 
     $(".diff").each(function (index) {
@@ -126,47 +117,34 @@ function updateActual() {
         totdiff += Math.pow(tmp, 2);
     });
 
-    $('.totactual').val(totactual.toFixed(2));
-    $('.tottarget').val(tottarget.toFixed(2));
-    $('.grddiff').val(totdiff.toFixed(2));
+    $(".totactual").val(totactual.toFixed(2));
+    $(".tottarget").val(tottarget.toFixed(2));
+    $(".grddiff").val(totdiff.toFixed(2));
 
 }
 
 function hogehoge_target($tblrow) {
 
-    alert('target change detected');
-    updateActual();
-    //   newFunction(); // WHY??
-    //
-    //  function newFunction() {
-    //    updateActual();
-    //}
+    alert("target change detected");
+    updateTotalActual();
 }
 
 function hogehoge_qty($tblrow) {
 
-    alert('qty change detected');
+    alert("qty change detected");
     let qty = $tblrow.find(".qty").val();
     let price = $tblrow.find(".price").val();
     let subTotal = parseInt(qty, 10) * Number(price.replace(/[^0-9.-]+/g, ""));
     if (!isNaN(subTotal)) {
-
-        $tblrow.find('.subtot').val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        let promise1 = new Promise(function (resolve, reject) {
-            updateGrdTotal();
-        });
-        promise1.then(function (value) {
-            updateActual();
-        })
-
-
+        $tblrow.find(".subtot").val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
+        updateTotalActual();
 
     } else {
-        $tblrow.find('.subtot').val('NaN');
-        $('.grdtot').val('NaN');
+        $tblrow.find(".subtot").val("NaN");
+        $(".grdtot").val("NaN");
     }
 
-    alert('subtotal and grdtotal updated');
+    alert("subtotal and grdtotal updated");
 
 }
 
@@ -185,26 +163,25 @@ function hogehoge_ticker($tblrow) {
         const price = data.price;
         if (price) {
 
-            $tblrow.find('.price').val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+            $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
-            console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+            console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
             console.log(price);
             const subTotal = parseInt(qty, 10) * Number(price.toFixed(2));
 
             if (!isNaN(subTotal)) {
 
-                $tblrow.find('.subtot').val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-                updateGrdTotal();
-                updateActual();
+                $tblrow.find(".subtot").val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
+                updateTotalActual();
             } else {
-                $tblrow.find('.subtot').val('NaN');
-                $('.grdtot').val('NaN');
+                $tblrow.find(".subtot").val("NaN");
+                $(".grdtot").val("NaN");
             }
         } else {
-            $tblrow.find('.price').val('NaN');
-            $tblrow.find('.subtot').val('NaN');
-            $('.grdtot').val('NaN');
-            alert('getJSON request failed!');
+            $tblrow.find(".price").val("NaN");
+            $tblrow.find(".subtot").val("NaN");
+            $(".grdtot").val("NaN");
+            alert("getJSON request failed!");
         }
     });
 }
@@ -212,39 +189,30 @@ function hogehoge_ticker($tblrow) {
 
 function updateQuotes_updates() {
     let $tblrows = $("#tblCurrent tbody tr");
+
     $tblrows.each(function (index) {
         let $tblrow = $(this);
-
-        $tblrow.find('.qty').on('change', function () {
-            hogehoge_qty($tblrow);
-        });
-        $tblrow.find('.ticker').on('change', function () {
-            alert('ticker change detected');
-            hogehoge_ticker($tblrow);
-        });
-        $tblrow.find('.target').on('change', function () {
-            hogehoge_target($tblrow);
-        });
+        updateQuotes_updatesbyRow($tblrow);
     });
 };
 
 function updateQuotes_updatesbyRow($tblrow) {
 
-    $tblrow.find('.qty').on('change', function () {
+    $tblrow.find(".qty").on("change", function () {
         hogehoge_qty($tblrow);
     });
-    $tblrow.find('.ticker').on('change', function () {
+    $tblrow.find(".ticker").on("change", function () {
 
-        alert('ticker change detected');
+        alert("ticker change detected");
         hogehoge_ticker($tblrow);
     });
-    $tblrow.find('.target').on('change', function () {
+    $tblrow.find(".target").on("change", function () {
         hogehoge_target($tblrow);
     });
 };
 
 function updateQuotes_initialize() {
-    $('.price, .subtot, .actual, .diff, .grdtot').prop('readonly', true);
+    $(".price, .subtot, .actual, .diff, .grdtot").prop("readonly", true);
     let $tblrows = $("#tblCurrent tbody tr");
 
     $tblrows.each(function (index) {

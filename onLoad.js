@@ -10,8 +10,7 @@ $(function () {
                     rowdata = rowdata.filter(word => word.length > 1);
 
                     let container = $("#dvCurrent");
-                    container.html('');
-                    //makeTable(container, rowdata);
+                    container.html("");
                     makeEmptyTable(container, rowdata.length);
                     fillTableWithData(container, rowdata);
                     updateQuotes_initialize();
@@ -31,13 +30,11 @@ $(function () {
 
     $("#uploadSampleData").bind("click", function () {
 
-        //let rowdata = ["VTI,100,40", "VEA,100,30", "VWO,100,30"];
-        //let rowdata = ["VTI,124", "VYM,98", "VEA,371", "VWO,177", "GLD,48", "AGG,64", "XLRE,90"];
-        let rowdata = ["VTI,124,28.0", "VYM,98,13.0", "VEA,371,23.0", "VWO,177,11.0", "GLD,48,10.0", "AGG,64,10.0", "XLRE,90,5.0"];
+        let rowdata = ["VTI,50,40", "VEA,100,30", "VWO,100,30"];
         let containerC = $("#dvCurrent");
         let containerV = $("#dvVirtual");
-        containerC.html('');
-        containerV.html('');
+        containerC.html("");
+        containerV.html("");
 
 
         const names = ["Ticker", "Quantity", "Price", "Sub-Total", "Actual%", "Target%", "Diff%"];
@@ -51,9 +48,9 @@ $(function () {
         let dvBudget = $("#dvBudget");
         dvBudget.html('<input type="text" class="budget" value="$2,000"/>')
 
-        dvBudget.find('.budget').on('change', function () {
+        dvBudget.find(".budget").on("change", function () {
             let budget = Number($(this).val().replace(/[^0-9.-]+/g, ""));
-            $(this).val("$" + budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+            $(this).val("$" + budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
         });
     });
 
@@ -80,10 +77,10 @@ $(function () {
     $("#runfmincon").bind("click", function () {
 
         let containerV = $("#dvVirtual");
-        containerV.html('');
+        containerV.html("");
 
         let containerC = $("#dvCurrent");
-        let length = containerC.find('.ticker').length;
+        let length = containerC.find(".ticker").length;
 
         const names = ["Ticker", "to Add", "Cost", "Sub-Total", "Actual%", "Target%", "Diff%"];
         const classes = ["ticker_v", "qty2add", "cost", "subtot_v", "actual_v", "target_v", "diff_v"];
@@ -100,7 +97,7 @@ $(function () {
         });
 
         let targets = [];
-        var target_pf = [0.275, 0.125, 0.2, 0.1, 0.1, 0.15, 0.05, 0, 0, 0];
+        let target_pf = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         $(".target").each(function (index) {
             targets.push($(this).val());
             target_pf[index] = $(this).val() / 100;
@@ -110,17 +107,14 @@ $(function () {
         });
 
         // inputs
-        // let cost = 2000;
-        var tmp = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
-        var cost = [tmp, 0, 0];
-        var costs = tmp;
+        let costs = Number($(".budget").val().replace(/[^0-9.-]+/g, ""));
 
-        var price = [155.83, 90.4, 42.78, 42.50, 142.56, 112.93, 39.23, 0, 0, 0];
+        let price = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         $(".price").each(function (index) {
             price[index] = Number($(this).val().replace(/[^0-9.-]+/g, ""));
         });
 
-        var position = [12, 20, 40, 15, 6, 18, 12, 0, 0, 0];
+        let position = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         $(".qty").each(function (index) {
             position[index] = Number($(this).val());
         });
@@ -128,28 +122,25 @@ $(function () {
         console.log(position);
         console.log(price);
         console.log(target_pf);
-        console.log(cost);
+        console.log(costs);
 
         // Create Data    
-        var Target_pf = new Float64Array(target_pf);
-        var Price = new Float64Array(price);
-        var Position = new Float64Array(position);
-        var Cost = new Float64Array(cost);
-        var Position2Add = new Float64Array(10);
+        let Target_pf = new Float64Array(target_pf);
+        let Price = new Float64Array(price);
+        let Position = new Float64Array(position);
+        let Position2Add = new Float64Array(10);
         // Move Data to Heap
-        var Target_pfbytes = _arrayToHeap(Target_pf);
-        var Pricebytes = _arrayToHeap(Price);
-        var Positionbytes = _arrayToHeap(Position);
-        var Costbytes = _arrayToHeap(Cost);
-        var Position2Addbytes = _arrayToHeap(Position2Add);
+        let Target_pfbytes = _arrayToHeap(Target_pf);
+        let Pricebytes = _arrayToHeap(Price);
+        let Positionbytes = _arrayToHeap(Position);
+        let Position2Addbytes = _arrayToHeap(Position2Add);
         // Run Function
         _optimizeposition_initialize();
-        //_getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, Costbytes.byteOffset, Position2Addbytes.byteOffset);
         _getPosition2Add(Target_pfbytes.byteOffset, Pricebytes.byteOffset, Positionbytes.byteOffset, costs, Position2Addbytes.byteOffset);
         _optimizeposition_terminate();
         //  Copy Data from Heap
         Position2Add = _heapToArray(Position2Addbytes, Position2Add);
-        var position2add = Array.from(Position2Add);
+        let position2add = Array.from(Position2Add);
         // Free Data from Heap
         _freeArray(Target_pfbytes);
         _freeArray(Pricebytes);
