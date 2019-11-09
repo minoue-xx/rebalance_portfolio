@@ -25,22 +25,23 @@ https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows
     <script type="text/javascript" src='js/onLoad.js'></script>
     <!--ref on async/defer/defaut: https://qiita.com/phanect/items/82c85ea4b8f9c373d684-->
 
+    <h1>Rebalance Portfolio</h1>
+    <hr />
+    <h3>1. Your current Portofolio</h3>
     <input type="file" id="fileUpload" />
     <input type="button" id="upload" value="Upload" />
     <input type="button" id="uploadSampleData" value="Upload sample data" />
     <input type="button" id="addrow" value="Add a new row" />
     <input type="button" id="deleterow" value="Delete the last row" />
-
-    <hr />
-    <p>Current Portofolio</p>
     <div id="dvCurrent"></div>
-    <hr />
-    <p>Budget</p>
+    <p id="updated_at"></p>
+
+    <h3>2. Setting your Budget</h3>
     <input type="button" id="runfmincon" value="Rebalance" />
     <div id="dvBudget"></div>
-    <hr />
-    <p>Virtual Portofolio</p>
+
+    <h3>3. Your virtual Portofolio</h3>
     <div id="dvVirtual"></div>
-    <hr />
+
 </body>
 </head>

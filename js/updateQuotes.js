@@ -125,13 +125,13 @@ function updateTotalActual() {
 
 function hogehoge_target($tblrow) {
 
-    alert("target change detected");
+    //alert("target change detected");
     updateTotalActual();
 }
 
 function hogehoge_qty($tblrow) {
 
-    alert("qty change detected");
+    //alert("qty change detected");
     let qty = $tblrow.find(".qty").val();
     let price = $tblrow.find(".price").val();
     let subTotal = parseInt(qty, 10) * Number(price.replace(/[^0-9.-]+/g, ""));
@@ -144,7 +144,7 @@ function hogehoge_qty($tblrow) {
         $(".grdtot").val("NaN");
     }
 
-    alert("subtotal and grdtotal updated");
+    //alert("subtotal and grdtotal updated");
 
 }
 
@@ -165,8 +165,8 @@ function hogehoge_ticker($tblrow) {
 
             $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
-            console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
-            console.log(price);
+            //console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
+            //console.log(price);
             const subTotal = parseInt(qty, 10) * Number(price.toFixed(2));
 
             if (!isNaN(subTotal)) {
@@ -177,11 +177,15 @@ function hogehoge_ticker($tblrow) {
                 $tblrow.find(".subtot").val("NaN");
                 $(".grdtot").val("NaN");
             }
+
+            document.getElementById('updated_at').textContent = "Updated at " + data.updated_at + "(UTC)";
+
         } else {
             $tblrow.find(".price").val("NaN");
             $tblrow.find(".subtot").val("NaN");
             $(".grdtot").val("NaN");
-            alert("getJSON request failed!");
+            alert("Your price request failed. The ticker might not exist.");
+            //alert("getJSON request failed!");
         }
     });
 }
@@ -203,7 +207,7 @@ function updateQuotes_updatesbyRow($tblrow) {
     });
     $tblrow.find(".ticker").on("change", function () {
 
-        alert("ticker change detected");
+        //alert("ticker change detected");
         hogehoge_ticker($tblrow);
     });
     $tblrow.find(".target").on("change", function () {
