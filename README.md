@@ -9,5 +9,6 @@ https://jp.mathworks.com/matlabcentral/fileexchange/69973-generate-javascript-us
 
 ## Creating Portfolio
 
-Option 1: You can start from [Upload Sample Data] and then add/delete to create your own
+Option 1: You can start from [Upload Sample Data] and then add/delete to create your own.
+
 Option 2: Upload csv file. See sampleData2Upload.csv for file format.
