@@ -13,7 +13,7 @@ Option 1: You can start from [Upload Sample Data] and then add/delete to create 
 
 Option 2: Upload csv file. See sampleData2Upload.csv for file format.
 
-When modifying or add 'ticker' the price updates itself.
+You can modify "ticker", "qty", and "target%" only. When modifying or add 'ticker' the price updates itself. 
 
 ## 2. Setting budget
 
