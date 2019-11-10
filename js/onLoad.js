@@ -11,7 +11,10 @@ $(function () {
 
                     let container = $("#dvCurrent");
                     container.html("");
-                    makeEmptyTable(container, rowdata.length);
+                    const names = ["Ticker", "Quantity", "Price", "Sub-Total", "Actual%", "Target%", "Diff%"];
+                    const classes = ["ticker", "qty", "price", "subtot", "actual", "target", "diff"];
+                    const footclasses = ["grdtot", "totactual", "tottarget", "grddiff"];
+                    makeEmptyTable(container, rowdata.length, names, classes, footclasses, "tblCurrent");
                     fillTableWithData(container, rowdata);
                     updateQuotes_initialize();
                     updateQuotes_updates();
