@@ -65,7 +65,7 @@ function fillTableWithData(container, rowdata) {
         let $tblrow = $(this);
 
         cells = rowdata[index].split(",");
-        cells = cells.filter(word => word.length > 1);
+        //cells = cells.filter(word => word.length > 1);
 
         $tblrow.find(".ticker").val(cells[0]);
         $tblrow.find(".qty").val(cells[1]);
