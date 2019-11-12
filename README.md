@@ -7,7 +7,7 @@ You can find the tool here:
 https://jp.mathworks.com/matlabcentral/fileexchange/69973-generate-javascript-using-matlab-coder
 
 
-## 1. Creating your portfolio
+### Step 1. Creating your portfolio
 
 Option 1: You can start from [Upload Sample Data] and then add/delete to create your own.
 
@@ -15,10 +15,13 @@ Option 2: Upload csv file. See sampleData2Upload.csv for file format.
 
 You can modify "ticker", "qty", and "target%" only. When modifying or add 'ticker' the price updates itself. 
 
-## 2. Setting budget
+### Step 2. Setting budget
 
 Specify the amount that you would like to spend on this rebalancing. Please note that rebalancing will be achieved by buying only.
 
-## 3. Perform optimization
+### Step 3. Perform optimization
 
 Click [Relabance]
+
+![Step1toStep3](https://github.com/minoue-xx/rebalance_portfolio/blob/master/portolioRebalance_videoEN.gif)
+
