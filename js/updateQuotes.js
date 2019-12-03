@@ -1,3 +1,4 @@
+//Copyright (c) 2019 Michio Inoue
 function updateVirtual() {
 
     let price = [];

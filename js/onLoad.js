@@ -1,3 +1,4 @@
+//Copyright (c) 2019 Michio Inoue
 $(function () {
     $("#upload").bind("click", function () {
         let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;

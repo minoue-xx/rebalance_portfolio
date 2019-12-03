@@ -1,3 +1,4 @@
+//Copyright (c) 2019 Michio Inoue
 function makeEmptyTable(container, nBodyRows, names, classes, footclasses, idname) {
 
     let table = $("<table/>");

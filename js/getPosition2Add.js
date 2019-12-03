@@ -1,3 +1,4 @@
+//Copyright (c) 2019 Michio Inoue
 // JavaScript Array to Emscripten Heap
 function _arrayToHeap(typedArray) {
     var numBytes = typedArray.length * typedArray.BYTES_PER_ELEMENT;
