@@ -1,4 +1,6 @@
 function xlong = getPosition2Add(target_pf, price, position, budget)
+%-------------------------------------------------------------------------
+% Copyright (c) 2019 Michio Inoue
 
 % Specify the Dimensions and Data Types
 assert(isa(target_pf, 'double'));
@@ -17,35 +19,35 @@ price = price(idx);
 position = position(idx);
 N = sum(idx);
 
-% ���ꂼ��̖��������w������΃^�[�Q�b�g�Ƃ���ۗL�����ɋ߂Â��������߂܂��B
-%�@���̍ۂ̐���� Cost�F���v���h���܂ł̍w���Ƃ��邩
+% それぞれの銘柄いくつ購入すればターゲットとする保有割合に近づくかを求めます。
+%　その際の制約は Cost：合計何ドルまでの購入とするか
 Cost = budget(1);
 
-% ���`�s��������Ȃ�
+% 線形不等式制約なし
 A = [];
 b = [];
-% ���`��������i���v�R�X�g�� Cost �j
+% 線形等式制約（合計コストが Cost ）
 % Aeq = [];
 % beq = [];
 Aeq = price;
 beq = Cost;
-% �w�����̏㉺��
+% 購入数の上下限
 lb = zeros(1,N);
 ub = inf(1,N);
-% �����l�� Cost �� target_pf �Ŋ���U�����ۂ̒l���g�p
+% 初期値は Cost を target_pf で割り振った際の値を使用
 x0 = Cost*target_pf./(price);
 
 options = optimoptions('fmincon','Algorithm','sqp');
 
-% �ړI�֐��� getDiff �Œ�`����Ă��܂��B
-% �^�[�Q�b�g�ۗ̕L�����Ƃ̌덷���a���������ŏ��Ƃ��邱�Ƃ�ڎw���܂��B
+% 目的関数は getDiff で定義されています。
+% ターゲットの保有割合との誤差二乗和平方根を最小とすることを目指します。
 objfun = @(x2add) getDiff(x2add,price,position,target_pf);
 x = fmincon(objfun,x0,A,b,Aeq,beq,lb,ub,[],options);
 
-% fmincon ���g�p
-% �{���͐������ł��������Ŋ��������߂���A�[���͖������܂��B
-% �w��������������΂����܂Ŗ��ɂ͂Ȃ�Ȃ�����
-% �w�������̏����_�ȉ��؂�̂�
+% fmincon を使用
+% 本来は整数問題ですが実数で株数を求めた後、端数は無視します。
+% 購入株数が多ければそこまで問題にはならないため
+% 購入株数の小数点以下切り捨て
 xlong = zeros(1,10);
 xlong(1:N) = floor(x);
 
