@@ -90,7 +90,8 @@ $(function () {
         const classes = ["ticker_v", "qty2add", "cost", "subtot_v", "actual_v", "target_v", "diff_v"];
         const footclasses = ["totcost", "grdtot_v", "totactual_v", "tottarget_v", "grddiff_v"];
         makeEmptyTable(containerV, length, names, classes, footclasses, "tblVirtual");
-
+        $(".ticker_v, .cost, .subtot_v, .actual_v, .diff_v").prop("readonly", true);
+        $(".totcost, .grdtot_v, .totalactual_v, .tottarget_v, .grddiff_v").prop("readonly", true);
 
         let tickers = [];
         $(".ticker").each(function (index) {

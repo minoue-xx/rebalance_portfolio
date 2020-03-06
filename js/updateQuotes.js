@@ -228,7 +228,8 @@ function updateVirtual_editing() {
 
 
 function updateQuotes_initialize() {
-    $(".price, .subtot, .actual, .diff, .grdtot").prop("readonly", true);
+    $(".price, .subtot, .actual, .diff").prop("readonly", true);
+    $(".grdtot, .totalactual, .tottarget, .grddiff").prop("readonly", true);
     let $tblrows = $("#tblCurrent tbody tr");
 
     $tblrows.each(function (index) {
