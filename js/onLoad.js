@@ -162,6 +162,7 @@ $(function () {
         });
 
         updateVirtual();
+        updateQuotes_updatesV();
     });
 
 

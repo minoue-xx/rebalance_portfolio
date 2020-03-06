@@ -216,6 +216,23 @@ function updateQuotes_updatesbyRow($tblrow) {
     });
 };
 
+function updateQuotes_updatesV() {
+    let $tblrows = $("#tblVirtual tbody tr");
+
+    $tblrows.each(function (index) {
+        let $tblrow = $(this);
+        updateQuotes_updatesbyRow($tblrow);
+    });
+};
+
+function updateQuotes_updatesbyRowV($tblrow) {
+
+    $tblrow.find(".qty2add").on("change", function () {
+        hogehoge_qty($tblrow);
+    });
+};
+
+
 function updateQuotes_initialize() {
     $(".price, .subtot, .actual, .diff, .grdtot").prop("readonly", true);
     let $tblrows = $("#tblCurrent tbody tr");
