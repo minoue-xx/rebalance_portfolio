@@ -162,7 +162,7 @@ $(function () {
         });
 
         updateVirtual();
-        updateQuotes_updatesV();
+        updateManual();
     });
 
 

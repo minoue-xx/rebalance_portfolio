@@ -216,21 +216,15 @@ function updateQuotes_updatesbyRow($tblrow) {
     });
 };
 
-function updateQuotes_updatesV() {
+
+function updateVirtual_editing() {
     let $tblrows = $("#tblVirtual tbody tr");
 
-    $tblrows.each(function (index) {
-        let $tblrow = $(this);
-        updateQuotes_updatesbyRow($tblrow);
+    $tblrows.find(".qty2add").on("change", function () {
+        updateVirtual();
     });
 };
 
-function updateQuotes_updatesbyRowV($tblrow) {
-
-    $tblrow.find(".qty2add").on("change", function () {
-        hogehoge_qty($tblrow);
-    });
-};
 
 
 function updateQuotes_initialize() {
