@@ -162,7 +162,7 @@ $(function () {
         });
 
         updateVirtual();
-        updateManual();
+        updateVirtual_editing();
     });
 
 
