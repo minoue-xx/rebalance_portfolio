@@ -157,11 +157,12 @@ function hogehoge_ticker($tblrow) {
     }
 
     const ticker = $tblrow.find(".ticker").val();
-    const url = "https://financialmodelingprep.com/api/company/real-time-price/" + ticker + "?datatype=json";
+    const apikey = document.forms.id_form1.id_key.value;
+    const url = "https://financialmodelingprep.com/api/v3/quote/" + ticker + "?apikey=" + apikey;
 
     $.getJSON(url, function (data) {
 
-        const price = data.price;
+        const price = data[0].price;
         if (price) {
 
             $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));

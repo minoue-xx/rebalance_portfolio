@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2019 Michio Inoue
+Copyright (c) 2019-2020 Michio Inoue
 
 Read CSV File in jQuery using HTML5 File API
 https://www.aspsnippets.com/Articles/Read-CSV-File-in-jQuery-using-HTML5-File-API.aspx
@@ -15,35 +15,43 @@ https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows
 -->
 
 <head>
-    <title>Rebalancing Portofolio (Under Development)</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <title>Rebalancing Portofolio (Under Development)</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <body>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/optimizeposition.js"></script>
-    <script type="text/javascript" src="js/getPosition2Add.js"></script>
-    <script type="text/javascript" src="js/makeTable.js"></script>
-    <script type="text/javascript" src="js/updateQuotes.js"></script>
-    <script type="text/javascript" src='js/onLoad.js'></script>
-    <!--ref on async/defer/defaut: https://qiita.com/phanect/items/82c85ea4b8f9c373d684-->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="js/optimizeposition.js"></script>
+  <script type="text/javascript" src="js/getPosition2Add.js"></script>
+  <script type="text/javascript" src="js/makeTable.js"></script>
+  <script type="text/javascript" src="js/updateQuotes.js"></script>
+  <script type="text/javascript" src='js/onLoad.js'></script>
+  <!--ref on async/defer/defaut: https://qiita.com/phanect/items/82c85ea4b8f9c373d684-->
 
-    <h1>Rebalance Portfolio</h1>
-    <hr />
-    <h3>1. Your current Portofolio</h3>
-    <input type="file" id="fileUpload" />
-    <input type="button" id="upload" value="Upload" />
-    <input type="button" id="uploadSampleData" value="Upload sample data" />
-    <input type="button" id="addrow" value="Add a new row" />
-    <input type="button" id="deleterow" value="Delete the last row" />
-    <div id="dvCurrent"></div>
-    <p id="updated_at"></p>
+  <h1>Rebalance Portfolio</h1>
+  <hr />
+  <h3>1. Your current Portofolio</h3>
+  <p> The Real-time price is provided by Financial Modeling Prep (<a
+      href="https://financialmodelingprep.com/">LINK</a>). <br>
+    Please provide your API key below to access its service.
+    <form name="form1" id="id_form1">
+      <td align="right"><b> API key：</b></td>
+      <td><input type="text" id="id_key" name="apikey" size="32" maxlength="32"></td>
+    </form>
+  </p>
+  <input type="file" id="fileUpload" />
+  <input type="button" id="upload" value="Upload" />
+  <input type="button" id="uploadSampleData" value="Upload sample data" />
+  <input type="button" id="addrow" value="Add a new row" />
+  <input type="button" id="deleterow" value="Delete the last row" />
+  <div id="dvCurrent"></div>
+  <p id="updated_at"></p>
 
-    <h3>2. Setting your Budget</h3>
-    <input type="button" id="runfmincon" value="Rebalance" />
-    <div id="dvBudget"></div>
+  <h3>2. Setting your Budget</h3>
+  <input type="button" id="runfmincon" value="Rebalance" />
+  <div id="dvBudget"></div>
 
-    <h3>3. Your virtual Portofolio</h3>
-    <div id="dvVirtual"></div>
+  <h3>3. Your virtual Portofolio</h3>
+  <div id="dvVirtual"></div>
 
 </body>
 </head>
