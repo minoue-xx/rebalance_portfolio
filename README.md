@@ -2,7 +2,7 @@
 
 [![View Rebalance your financial portfolio on browser on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/75169-rebalance-your-financial-portfolio-on-browser)
 
-Copyright (c) 2019 Michio Inoue
+Copyright (c) 2019-2020 Michio Inoue
 
 
 This is a practice mini-project to learn HTML, JavaScript and WebAssembly.

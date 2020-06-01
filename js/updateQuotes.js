@@ -1,4 +1,4 @@
-//Copyright (c) 2019 Michio Inoue
+//Copyright (c) 2019-2020 Michio Inoue
 function updateVirtual() {
 
     let price = [];
