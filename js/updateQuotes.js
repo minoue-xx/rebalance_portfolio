@@ -163,7 +163,7 @@ function hogehoge_ticker($tblrow) {
 
     $.getJSON(url, function (data) {
 
-        const price = data[0].latestPrice;
+        const price = data.latestPrice;
         if (price) {
 
             $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
