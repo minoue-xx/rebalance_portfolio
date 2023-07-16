@@ -159,37 +159,50 @@ function hogehoge_ticker($tblrow) {
     const ticker = $tblrow.find(".ticker").val();
     const apikey = document.forms.id_form1.id_key.value;
     //const url = "https://financialmodelingprep.com/api/v3/quote/" + ticker + "?apikey=" + apikey;
-    const url = "https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=" + apikey;
+    //const url = "https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=" + apikey;
 
-    $.getJSON(url, function (data) {
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: 'https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/' + ticker,
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': apikey,
+            'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
+        }
+    };
 
-        const price = data.latestPrice;
+//  $.ajax(settings).done(function (response) {
+//  	console.log(response[0].price);
+//  });
+
+    $.ajax(settings).done(function (response) {
+        console.log(response[0].regularMarketPrice);
+
+        const price = response[0].regularMarketPrice;
         if (price) {
+        $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
-            $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
+                const subTotal = parseInt(qty, 10) * Number(price.toFixed(2));
 
-            //console.log(price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
-            //console.log(price);
-            const subTotal = parseInt(qty, 10) * Number(price.toFixed(2));
+                if (!isNaN(subTotal)) {
 
-            if (!isNaN(subTotal)) {
+                    $tblrow.find(".subtot").val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
+                    updateTotalActual();
+                } else {
+                    $tblrow.find(".subtot").val("NaN");
+                    $(".grdtot").val("NaN");
+                }
 
-                $tblrow.find(".subtot").val("$" + subTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
-                updateTotalActual();
+                document.getElementById('updated_at').textContent = "Updated at " + data.updated_at + "(UTC)";
+
             } else {
+                $tblrow.find(".price").val("NaN");
                 $tblrow.find(".subtot").val("NaN");
                 $(".grdtot").val("NaN");
+                alert("Your price request failed. The ticker might not exist.");
+                //alert("getJSON request failed!");
             }
-
-            document.getElementById('updated_at').textContent = "Updated at " + data.updated_at + "(UTC)";
-
-        } else {
-            $tblrow.find(".price").val("NaN");
-            $tblrow.find(".subtot").val("NaN");
-            $(".grdtot").val("NaN");
-            alert("Your price request failed. The ticker might not exist.");
-            //alert("getJSON request failed!");
-        }
     });
 }
 

@@ -2,7 +2,7 @@
 
 [![View Rebalance your financial portfolio on browser on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/75169-rebalance-your-financial-portfolio-on-browser)
 
-Copyright (c) 2019-2020 Michio Inoue
+Copyright (c) 2019-2023 Michio Inoue
 
 
 This is a practice mini-project to learn HTML, JavaScript and WebAssembly.
@@ -12,6 +12,9 @@ Nonlinear optimization is used to rebalance the financial portfolio, where MATLA
 You can find the tool here:
 https://jp.mathworks.com/matlabcentral/fileexchange/69973-generate-javascript-using-matlab-coder
 
+
+### Step 0. Obtain API Key
+[Yahoo Finance at RapidAPI](https://rapidapi.com/sparior/api/yahoo-finance15)
 
 ### Step 1. Creating your portfolio
 
