@@ -1,73 +1,44 @@
-# MATLAB -> C++ -> WebAssembly ‚Ì©“®•ÏŠ·‚ğg‚Á‚½”ñüŒ`Å“K‰» on JavaScript
-# 0. ‚Í‚¶‚ß‚É
 
+# <span style="color:rgb(213,80,0)">MATLAB -> C++ -> WebAssembly ã®è‡ªå‹•å¤‰æ›ã‚’ä½¿ã£ãŸéç·šå½¢æœ€é©åŒ– on JavaScript</span>
+# 0. ã¯ã˜ã‚ã«
 
-MATLAB Central ‚Å Generate JavaScript Using MATLAB Coder ‚È‚éƒc[ƒ‹‚ğŒ©‚Â‚¯‚Ü‚µ‚½BMATLAB Coder ‚ğg‚Á‚Ä MATLAB ‚©‚ç C++ ‚É•ÏŠ·‚µ‚½ŒãA‚³‚ç‚É WebAssembly ‚É‚Ü‚Å‚à‚Á‚Ä‚¢‚­ƒc[ƒ‹‚Ì‚æ‚¤‚Å‚·B¡‚Ü‚Å JavaScript ‚ÍG‚Á‚Ä‚±‚È‚©‚Á‚½‚Å‚·‚ªA©“®‚Å•ÏŠ·‚Å‚«‚é‚È‚ç‚â‚Á‚Ä‚İ‚é‚©EE‚Æ—V‚ñ‚Å‚İ‚½˜bB
+MATLAB Central ã§ Generate JavaScript Using MATLAB Coder ãªã‚‹ãƒ„ãƒ¼ãƒ«ã‚’è¦‹ã¤ã‘ã¾ã—ãŸã€‚MATLAB Coder ã‚’ä½¿ã£ã¦ MATLAB ã‹ã‚‰ C++ ã«å¤‰æ›ã—ãŸå¾Œã€ã•ã‚‰ã« WebAssembly ã«ã¾ã§ã‚‚ã£ã¦ã„ããƒ„ãƒ¼ãƒ«ã®ã‚ˆã†ã§ã™ã€‚ä»Šã¾ã§ JavaScript ã¯è§¦ã£ã¦ã“ãªã‹ã£ãŸã§ã™ãŒã€è‡ªå‹•ã§å¤‰æ›ã§ãã‚‹ãªã‚‰ã‚„ã£ã¦ã¿ã‚‹ã‹ãƒ»ãƒ»ã¨éŠã‚“ã§ã¿ãŸè©±ã€‚
 
-
-
-
-![image_0.png](MATLAB2WebAssembly_images/image_0.png)
-
-
-  
-
-
-WebAssembly ‚É‚Â‚¢‚Ä‚ÍˆÈ‰º‚Ì‚Q‹L–‚ªQl‚É‚È‚è‚Ü‚µ‚½B
+<p style="text-align:left"><img src="MATLAB2WebAssembly_media/image_0.png" width="902" alt="image_0.png"></p>
 
 
 
-   -  [Qiita: WebAssembly‚Æ‚Í](https://qiita.com/ShuntaShirai/items/3ac92412720789576f22) 
-   -  [Qiita: WebAssembly‚Æ‚ÍH- ÀÛ‚ÉCŒ¾Œê‚ğƒuƒ‰ƒEƒU‚Å“®‚©‚·-y2019”N6Œ”Åz](https://qiita.com/umamichi/items/c62d18b7ed81fdba63c2) 
+WebAssembly ã«ã¤ã„ã¦ã¯ä»¥ä¸‹ã®ï¼’è¨˜äº‹ãŒå‚è€ƒã«ãªã‚Šã¾ã—ãŸã€‚
+
+   -  [Qiita: WebAssemblyã¨ã¯](https://qiita.com/ShuntaShirai/items/3ac92412720789576f22) 
+   -  [Qiita: WebAssemblyã¨ã¯ï¼Ÿ- å®Ÿéš›ã«Cè¨€èªã‚’ãƒ–ãƒ©ã‚¦ã‚¶ã§å‹•ã‹ã™-ã€2019å¹´6æœˆç‰ˆã€‘](https://qiita.com/umamichi/items/c62d18b7ed81fdba63c2) 
 
 
+WebAssembly ã¯ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’ãƒ–ãƒ©ã‚¦ã‚¶ã§é«˜é€Ÿå®Ÿè¡Œã™ã‚‹ãŸã‚ã®ãƒã‚¤ãƒŠãƒªã¨ã—ã¦ã€JavaScript ã‹ã‚‰å‘¼ã³å‡ºã™å½¢ã§åˆ©ç”¨ã•ã‚Œã‚‹ã¨ã®ã“ã¨ã€‚éƒ¨åˆ†çš„ãªå‡¦ç†ã®é«˜é€ŸåŒ–ã€C/C++ç­‰ã®ä»–è¨€èªã§æ›¸ã‹ã‚ŒãŸæ—¢å­˜ã‚¢ãƒ—ãƒªã‚’ç§»æ¤ã™ã‚‹ã®ã«æœ‰åŠ¹ãã†ã§ã™ã€‚
 
-WebAssembly ‚ÍƒvƒƒOƒ‰ƒ€‚ğƒuƒ‰ƒEƒU‚Å‚‘¬Às‚·‚é‚½‚ß‚ÌƒoƒCƒiƒŠ‚Æ‚µ‚ÄAJavaScript ‚©‚çŒÄ‚Ño‚·Œ`‚Å—˜—p‚³‚ê‚é‚Æ‚Ì‚±‚ÆB•”•ª“I‚Èˆ—‚Ì‚‘¬‰»AC/C++“™‚Ì‘¼Œ¾Œê‚Å‘‚©‚ê‚½Šù‘¶ƒAƒvƒŠ‚ğˆÚA‚·‚é‚Ì‚É—LŒø‚»‚¤‚Å‚·B
+# ã‚„ã£ãŸã“ã¨
 
-
-  
-# ‚â‚Á‚½‚±‚Æ
-
-
-ˆÈ‘O Qiita ‚É‚à“Še‚µ‚½ƒlƒ^i[yMATLAB \& PythonzÅ“K‰»ŒvZ‚Æ Google Sheets ‚Ì“Ç‚İ‘‚«](https://qiita.com/eigs/items/4182fcd9b5da748ef77e)j‚Å‚·‚ªB
+ä»¥å‰ Qiita ã«ã‚‚æŠ•ç¨¿ã—ãŸãƒã‚¿ï¼ˆ[ã€MATLAB & Pythonã€‘æœ€é©åŒ–è¨ˆç®—ã¨ Google Sheets ã®èª­ã¿æ›¸ã](https://qiita.com/eigs/items/4182fcd9b5da748ef77e)ï¼‰ã§ã™ãŒã€‚
 
 
+**ã€Œãƒãƒ©ãƒ³ã‚¹ãŒå´©ã‚ŒãŸä¿æœ‰å‰²åˆã‚’ç›®æ¨™å‰²åˆã«è¿‘ã¥ã‘ã‚‹ãŸã‚ã«ã¯å„éŠ˜æŸ„ã‚’ä½•æ ªè²·ãˆã°ã„ã„ã®ã‹ã€**
 
 
-**uƒoƒ‰ƒ“ƒX‚ª•ö‚ê‚½•Û—LŠ„‡‚ğ–Ú•WŠ„‡‚É‹ß‚Ã‚¯‚é‚½‚ß‚É‚ÍŠe–Á•¿‚ğ‰½Š””ƒ‚¦‚Î‚¢‚¢‚Ì‚©v**
+ã«ã—ã¾ã™ã€‚ä»¥å‰ã®æŠ•ç¨¿ã§ã¯ã“ã®è¨ˆç®—ã‚’ MATLAB ã® fmincon ã¨ Google Sheets + Python ã‚’ä½¿ã£ã¦ã‚„ã‚Šã¾ã—ãŸãŒã€ä»Šå›ã¯ãƒ–ãƒ©ã‚¦ã‚¶ä¸Šã§å®Œçµã•ã›ã‚ˆã†ã¨ã„ã†ã®ãŒæœ€çµ‚çš„ãªç‹™ã„ã§ã™ãŒã€ã¾ãšã¯ MATLAB ã® fmincon ã®éç·šå½¢æœ€é©åŒ–è¨ˆç®—ã‚’ JavaScript ã§å®Ÿè¡Œã•ã›ã‚‹éƒ¨åˆ†ã‚’ã¾ã¨ã‚ã¾ã™ã€‚UI ã¯ã‚‚ã†å°‘ã—å‹‰å¼·ãŒå¿…è¦ãã†ãªã®ã§ã¾ãŸå¾Œæ—¥ã€‚
 
 
+åŸºæœ¬çš„ã«ã¯ Generate JavaScript Using MATLAB Coder ã§ç”¨æ„ã•ã‚Œã¦ã„ã‚‹  [ä¾‹é¡Œ: Pass Data to a Library](https://viewer.mathworks.com/?viewer=live_code&url=https%3A%2F%2Fjp.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fbd0e1def-822e-40bc-8a7f-5842c7197c5e%2Fe7abd4d2-be59-4ad2-858e-3f1046727acf%2Ffiles%2Fexamples%2FcreateLibrary%2FPassingDataArray.mlx&embed=web) ã®æµã‚Œã«æ²¿ã£ã¦ä½œæ¥­ã—ã¦ã„ã¾ã™ã€‚
 
 
-‚É‚µ‚Ü‚·BˆÈ‘O‚Ì“Še‚Å‚Í‚±‚ÌŒvZ‚ğ MATLAB ‚Ì fmincon ‚Æ Google Sheets + Python ‚ğg‚Á‚Ä‚â‚è‚Ü‚µ‚½‚ªA¡‰ñ‚Íƒuƒ‰ƒEƒUã‚ÅŠ®Œ‹‚³‚¹‚æ‚¤‚Æ‚¢‚¤‚Ì‚ªÅI“I‚È‘_‚¢‚Å‚·‚ªA‚Ü‚¸‚Í MATLAB ‚Ì fmincon ‚Ì”ñüŒ`Å“K‰»ŒvZ‚ğ JavaScript ‚ÅÀs‚³‚¹‚é•”•ª‚ğ‚Ü‚Æ‚ß‚Ü‚·BUI ‚Í‚à‚¤­‚µ•×‹­‚ª•K—v‚»‚¤‚È‚Ì‚Å‚Ü‚½Œã“úB
+MATLAB ãƒ˜ãƒ“ãƒ¼ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ã¯ãƒ¡ãƒ¢ãƒªã®å–ã‚Šæ‰±ã„æ–¹ãŒãƒˆãƒªãƒƒã‚­ãƒ¼ã§ã—ãŸã€‚ã€‚
 
 
-  
+ã‚³ãƒ¼ãƒ‰ã“ã¡ã‚‰ã‹ã‚‰ï¼š [GitHub: minoue-xx/MATLAB2WASM_sample](https://github.com/minoue-xx/MATLAB2WASM_sample)
 
 
-Šî–{“I‚É‚Í Generate JavaScript Using MATLAB Coder ‚Å—pˆÓ‚³‚ê‚Ä‚¢‚é  [—á‘è: Pass Data to a Library](https://viewer.mathworks.com/?viewer=live_code&url=https%3A%2F%2Fjp.mathworks.com%2Fmatlabcentral%2Fmlc-downloads%2Fdownloads%2Fbd0e1def-822e-40bc-8a7f-5842c7197c5e%2Fe7abd4d2-be59-4ad2-858e-3f1046727acf%2Ffiles%2Fexamples%2FcreateLibrary%2FPassingDataArray.mlx&embed=web) ‚Ì—¬‚ê‚É‰ˆ‚Á‚Äì‹Æ‚µ‚Ä‚¢‚Ü‚·B
+å®Ÿè¡Œãƒšãƒ¼ã‚¸ã¯ã“ã¡ã‚‰ï¼š[Github Pages: MATLAB2WASM_sample](https://minoue-xx.github.io/MATLAB-to-WebAssembly-sample/)ï¼ˆä½•ã‚‚ç›®ã«ã¯è¦‹ãˆã¾ã›ã‚“ãŒï¼‰
 
-
-  
-
-
-MATLAB ƒwƒr[ƒ†[ƒU[‚É‚Íƒƒ‚ƒŠ‚Ìæ‚èˆµ‚¢•û‚ªƒgƒŠƒbƒL[‚Å‚µ‚½BB
-
-
-  
-
-
-ƒR[ƒh‚±‚¿‚ç‚©‚çF [GitHub: minoue-xx/MATLAB2WASM_sample](https://github.com/minoue-xx/MATLAB2WASM_sample)
-
-
-
-
-Àsƒy[ƒW‚Í‚±‚¿‚çF[Github Pages: MATLAB2WASM_sample](https://minoue-xx.github.io/MATLAB-to-WebAssembly-sample/)i‰½‚à–Ú‚É‚ÍŒ©‚¦‚Ü‚¹‚ñ‚ªj
-
-
-  
-## ŠÂ‹«
-
+## ç’°å¢ƒ
    -  MATLAB (R2019b2) 
    -  Optimization Toolbox 
    -  MATLAB Coder 
@@ -75,37 +46,27 @@ MATLAB ƒwƒr[ƒ†[ƒU[‚É‚Íƒƒ‚ƒŠ‚Ìæ‚èˆµ‚¢•û‚ªƒgƒŠƒbƒL[‚Å‚µ‚½BB
    -  [Emscripten Development Kit](https://emscripten.org/index.html) v1.39.1 
    -  Google Chrome 
 
-# 1. ƒc[ƒ‹‚Ìİ’è
+# 1. ãƒ„ãƒ¼ãƒ«ã®è¨­å®š
+
+File Exchange ã‹ã‚‰ [Generate JavaScript Using MATLAB Coder](https://jp.mathworks.com/matlabcentral/fileexchange/69973-generate-javascript-using-matlab-coder) ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã€‚ã¾ãšé–‹ã `Setup.mlx` ã«å¾“ã£ã¦ Emscripten Development Kit ã®æœ€æ–°ç‰ˆã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã€‚ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒ•ã‚©ãƒ«ãƒ€ã ã¨ã†ã¾ãã„ã‹ãªã‹ã£ãŸã®ã§ã€ãƒ­ãƒ¼ã‚«ãƒ«ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãã ã•ã„ã€‚
+
+# 2. MATLAB Project ä½œæˆ
+
+Generate JavaScript Using MATLAB Coder ã§ã¯ [MATLAB Project](https://jp.mathworks.com/help/matlab/projects.html) ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚
 
 
-File Exchange ‚©‚ç [Generate JavaScript Using MATLAB Coder](https://jp.mathworks.com/matlabcentral/fileexchange/69973-generate-javascript-using-matlab-coder) ‚ğƒCƒ“ƒXƒg[ƒ‹B‚Ü‚¸ŠJ‚­ `Setup.mlx` ‚É]‚Á‚Ä Emscripten Development Kit ‚ÌÅV”Å‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·Bƒlƒbƒgƒ[ƒNƒtƒHƒ‹ƒ_‚¾‚Æ‚¤‚Ü‚­‚¢‚©‚È‚©‚Á‚½‚Ì‚ÅAƒ[ƒJƒ‹‚ÉƒCƒ“ƒXƒg[ƒ‹‚­‚¾‚³‚¢B
-
-
-  
-# 2. MATLAB Project ì¬
-
-
-Generate JavaScript Using MATLAB Coder ‚Å‚Í [MATLAB Project](https://jp.mathworks.com/help/matlab/projects.html) ‚ğg—p‚µ‚Ü‚·B
-
-
-
-
-ì‹ÆƒtƒHƒ‹ƒ_‚ÉˆÚ“®‚µ‚ÄAˆÈ‰º‚ğÀsBo—ÍŒ`®‚Í Dynamic Libeary (dll) ‚Å‚·B
-
+ä½œæ¥­ãƒ•ã‚©ãƒ«ãƒ€ã«ç§»å‹•ã—ã¦ã€ä»¥ä¸‹ã‚’å®Ÿè¡Œã€‚å‡ºåŠ›å½¢å¼ã¯ Dynamic Libeary (dll) ã§ã™ã€‚
 
 ```matlab
 proj = webcoder.setup.project("optimizePosition","Directory",pwd,"OutputType",'dll');
 ```
-  
-# 3. MATLAB ŠÖ”ì¬
 
+# 3. MATLAB é–¢æ•°ä½œæˆ
 
-”ñüŒ`Å“K‰»‚ğÀ{‚·‚éŠÖ” `getPosition2Add.m` ‚ğì‚è‚Ü‚·B“à—e‚Í [Qiita:yMATLAB \& PythonzÅ“K‰»ŒvZ‚Æ Google Sheets ‚Ì“Ç‚İ‘‚«](https://qiita.com/eigs/items/4182fcd9b5da748ef77e) ‚ÅĞ‰î‚µ‚½‚à‚Ì‚Æ‚Ù‚Ú“¯‚¶‚Å‚·‚ªAƒR[ƒh¶¬—p‚É“ü—Íˆø”‚ÌƒTƒCƒYEƒf[ƒ^Œ^‚ğ–¾¦‚µ‚Ü‚·BƒR[ƒh‘S•¶‚Í‚±‚¿‚çF [GitHub](https://github.com/minoue-xx/MATLAB2WASM_sample)
+éç·šå½¢æœ€é©åŒ–ã‚’å®Ÿæ–½ã™ã‚‹é–¢æ•° `getPosition2Add.m` ã‚’ä½œã‚Šã¾ã™ã€‚å†…å®¹ã¯ [Qiita:ã€MATLAB & Pythonã€‘æœ€é©åŒ–è¨ˆç®—ã¨ Google Sheets ã®èª­ã¿æ›¸ã](https://qiita.com/eigs/items/4182fcd9b5da748ef77e) ã§ç´¹ä»‹ã—ãŸã‚‚ã®ã¨ã»ã¼åŒã˜ã§ã™ãŒã€ã‚³ãƒ¼ãƒ‰ç”Ÿæˆç”¨ã«å…¥åŠ›å¼•æ•°ã®ã‚µã‚¤ã‚ºãƒ»ãƒ‡ãƒ¼ã‚¿å‹ã‚’æ˜ç¤ºã—ã¾ã™ã€‚ã‚³ãƒ¼ãƒ‰å…¨æ–‡ã¯ã“ã¡ã‚‰ï¼š [GitHub](https://github.com/minoue-xx/MATLAB2WASM_sample)
 
-
-  
-```matlab
-% getPosition2Add.m(ˆê•”)
+<pre>
+% getPosition2Add.m(ä¸€éƒ¨)
 function xlong = getPosition2Add(target_pf, price, position)
 
 % Specify the Dimensions and Data Types
@@ -116,82 +77,53 @@ assert(all( size(target_pf) == [ 1, 10 ]))
 assert(all( size(price) == [ 1, 10 ]))
 assert(all( size(position) == [ 1, 10 ]))
 
-%(ˆÈ‰º—ª)
-```
-  
+%(ä»¥ä¸‹ç•¥)
+</pre>
+
+ã“ã“ã§ã¯æœ€å¤§10éŠ˜æŸ„ã¾ã§å¯¾å¿œã™ã‚‹æƒ³å®šã§å…¥åŠ›é…åˆ—ã‚µã‚¤ã‚ºã‚’ 1x10 ã®ãƒ™ã‚¯ãƒˆãƒ«ã¨ã—ã¦ã‚³ãƒ¼ãƒ‰ç”Ÿæˆã—ã¾ã™ã€‚
 
 
-‚±‚±‚Å‚ÍÅ‘å10–Á•¿‚Ü‚Å‘Î‰‚·‚é‘z’è‚Å“ü—Í”z—ñƒTƒCƒY‚ğ 1x10 ‚ÌƒxƒNƒgƒ‹‚Æ‚µ‚ÄƒR[ƒh¶¬‚µ‚Ü‚·B
+MATLAB Coder è‡ªä½“ã¯ã€Œé…åˆ—ã‚µã‚¤ã‚ºã¯æœ€å¤§10ã¾ã§ã€ã¨ã„ã†è¨­å®šã‚‚å¯èƒ½ãªã‚“ã§ã™ãŒã€ãªãœã‹ WebAssembly ã¾ã§ã‚‚ã£ã¦ã„ãã¨ãƒ¡ãƒ¢ãƒªã‚¨ãƒ©ãƒ¼ãŒã§ã¾ã—ãŸã€‚åŸå› ã¯èª¿æŸ»ä¸­ã€‚é–¢æ•°ãŒã§ããŸã‚‰ã€`getPosition2Add.m` ã‚’ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«è¿½åŠ ã—ã¦ã€ãƒ©ãƒ™ãƒ«ã‚’ UserEntryPoints > Function ã«è¨­å®šã—ã¦ãŠãã¾ã™ã€‚
 
-
-
-
-MATLAB Coder ©‘Ì‚Íu”z—ñƒTƒCƒY‚ÍÅ‘å10‚Ü‚Åv‚Æ‚¢‚¤İ’è‚à‰Â”\‚È‚ñ‚Å‚·‚ªA‚È‚º‚© WebAssembly ‚Ü‚Å‚à‚Á‚Ä‚¢‚­‚Æƒƒ‚ƒŠƒGƒ‰[‚ª‚Å‚Ü‚µ‚½BŒ´ˆö‚Í’²¸’†BŠÖ”‚ª‚Å‚«‚½‚çA`getPosition2Add.m` ‚ğƒvƒƒWƒFƒNƒg‚É’Ç‰Á‚µ‚ÄAƒ‰ƒxƒ‹‚ğ UserEntryPoints > Function ‚Éİ’è‚µ‚Ä‚¨‚«‚Ü‚·B
-
+<p style="text-align:left"><img src="MATLAB2WebAssembly_media/image_1.png" width="902" alt="image_1.png"></p>
 
 
 
-![image_1.png](MATLAB2WebAssembly_images/image_1.png)
+ã“ã‚“ãªæ„Ÿã˜ã€‚
 
+# 4. JavaScript ã¨ WebAssembly ã®ç”Ÿæˆ
 
-  
-
-
-‚±‚ñ‚ÈŠ´‚¶B
-
-
-  
-# 4. JavaScript ‚Æ WebAssembly ‚Ì¶¬
-
-
-ˆÈ‰º‚ÌƒR[ƒh‚Å MATLAB Project ‚©‚çƒrƒ‹ƒh‚µ‚Ü‚·B— ‚Å MATLAB Coder + Emscripten SDK ‚ª‘–‚Á‚Ä‚¢‚é–Í—lB
-
+ä»¥ä¸‹ã®ã‚³ãƒ¼ãƒ‰ã§ MATLAB Project ã‹ã‚‰ãƒ“ãƒ«ãƒ‰ã—ã¾ã™ã€‚è£ã§ MATLAB Coder + Emscripten SDK ãŒèµ°ã£ã¦ã„ã‚‹æ¨¡æ§˜ã€‚
 
 ```matlab
 proj = openProject(pwd);
 webcoder.build.project(proj);
 ```
 
+C++ ã‚³ãƒ¼ãƒ‰ãŒ build ãƒ•ã‚©ãƒ«ãƒ€ã«å‡ºåŠ›ã•ã‚Œã¾ã™ã€‚ã•ã‚‰ã«ã€ã“ã® C++ ã‚³ãƒ¼ãƒ‰ãŒ `optimizeposition.js` ã¨ `optimizeposition.wasm` ã«ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã•ã‚Œã¦ã€dist ãƒ•ã‚©ãƒ«ãƒ€ã«å‡ºåŠ›ã•ã‚Œã¾ã™ã€‚
 
-C++ ƒR[ƒh‚ª build ƒtƒHƒ‹ƒ_‚Éo—Í‚³‚ê‚Ü‚·B‚³‚ç‚ÉA‚±‚Ì C++ ƒR[ƒh‚ª `optimizeposition.js` ‚Æ `optimizeposition.wasm` ‚ÉƒRƒ“ƒpƒCƒ‹‚³‚ê‚ÄAdist ƒtƒHƒ‹ƒ_‚Éo—Í‚³‚ê‚Ü‚·B
+# 5. HTML/JavaScript ã‹ã‚‰å‘¼ã³å‡ºã—
 
-
-  
-# 5. HTML/JavaScript ‚©‚çŒÄ‚Ño‚µ
-
-
-‚³‚ÄA‚æ‚¤‚â‚­–{‘èBMDN ‚É‚æ‚é‚Æ
-
-
-  
+ã•ã¦ã€ã‚ˆã†ã‚„ãæœ¬é¡Œã€‚MDN ã«ã‚ˆã‚‹ã¨
 
 
 JavaScript typed arrays are array-like objects and provide a mechanism for accessing raw binary data.
 
 
-  
+ã¨ã®ã“ã¨ã§ã€ã“ã® JavaScript typed arrays ã‚’ä½¿ã£ã¦ã€JavaScript ã‹ã‚‰ optimizeposition.wasm ã¨ãƒ‡ãƒ¼ã‚¿ã‚’ã‚„ã‚Šå–ã‚Šã—ã¾ã™ã€‚
+
+## å‡¦ç†ã®æµã‚Œ
+1.  JavaScript typed array ã‚’ä½œæˆ
+2. typed array ã®è¦ç´ æ•°ã‹ã‚‰å¿…è¦ãªé ˜åŸŸã‚’è¨ˆç®—ã€wasm å´ã®ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿
+3. ç¢ºä¿ã—ãŸé ˜åŸŸã« typed array ã®å€¤ã‚’ã‚³ãƒ”ãƒ¼
+4. wasm å´ã®è¨ˆç®—å‡¦ç†ã‚’å®Ÿè¡Œ
+5. wasm å´ã®ãƒ¡ãƒ¢ãƒªã‹ã‚‰ typed array ã«å€¤ã‚’ã‚³ãƒ”ãƒ¼
+6. ä¸è¦ã«ãªã£ãŸé ˜åŸŸã‚’è§£æ”¾
 
 
-‚Æ‚Ì‚±‚Æ‚ÅA‚±‚Ì JavaScript typed arrays ‚ğg‚Á‚ÄAJavaScript ‚©‚ç optimizeposition.wasm ‚Æƒf[ƒ^‚ğ‚â‚èæ‚è‚µ‚Ü‚·B
+1-3 ã®å‡¦ç†ã‚’ã—ã¦ã„ã‚‹ã®ãŒ `_arrayToHeap`ã€5 ãŒ  `_heapToArray` ã§ã™ã€‚å‡¦ç†ã®è©³ç´°ã¯ [Guthub: Planeshifter/emscripten-examples](https://github.com/Planeshifter/emscripten-examples/tree/master/01_PassingArrays) ã® README.md ã®è¨˜è¿°ãŒå‚è€ƒã«ãªã‚Šã¾ã™ã€‚
 
-
-  
-## ˆ—‚Ì—¬‚ê
-
-   1.  JavaScript typed array ‚ğì¬ 
-   1.  typed array ‚Ì—v‘f”‚©‚ç•K—v‚È—Ìˆæ‚ğŒvZAwasm ‘¤‚Ìƒƒ‚ƒŠ‚ğŠm•Û 
-   1.  Šm•Û‚µ‚½—Ìˆæ‚É typed array ‚Ì’l‚ğƒRƒs[ 
-   1.  wasm ‘¤‚ÌŒvZˆ—‚ğÀs 
-   1.  wasm ‘¤‚Ìƒƒ‚ƒŠ‚©‚ç typed array ‚É’l‚ğƒRƒs[ 
-   1.  •s—v‚É‚È‚Á‚½—Ìˆæ‚ğ‰ğ•ú 
-
-
-
-1-3 ‚Ìˆ—‚ğ‚µ‚Ä‚¢‚é‚Ì‚ª `_arrayToHeap`A5 ‚ª `_heapToArray `‚Å‚·Bˆ—‚ÌÚ×‚Í [Guthub: Planeshifter/emscripten-examples](https://github.com/Planeshifter/emscripten-examples/tree/master/01_PassingArrays) ‚Ì README.md ‚Ì‹Lq‚ªQl‚É‚È‚è‚Ü‚·B
-
-
-  
-```matlab
+<pre>
 script.js
     // JavaScript Array to Emscripten Heap
     function _arrayToHeap(typedArray) {
@@ -244,51 +176,36 @@ script.js
             console.log(position + " + " + position2add);
         }
     };
-```
-  
-## 6. ‚³‚ÄŒ‹‰Ê‚ğ‚İ‚Ä‚İ‚æ‚¤
+</pre>
+
+## 6. ã•ã¦çµæœã‚’ã¿ã¦ã¿ã‚ˆã†
+
+ãƒ­ãƒ¼ã‚«ãƒ«ã‚µãƒ¼ãƒã‚’ç«‹ã¦ã¦çµæœã‚’ã¿ã¦ã¿ã¾ã™ã€‚Fetch API ã¯ file URI Scheme ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„ãŸã‚ã€ãƒ•ã‚¡ã‚¤ãƒ«ã« http URI Scheme ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã‚‰ã—ã„ã€‚Generate JavaScript Using MATLAB Coder ã«ã¯é–¢æ•°ãŒç”¨æ„ã•ã‚Œã¦ã¾ã™ã®ã§ã“ã‚Œã‚’ä½¿ã„ã¾ã™ã€‚
 
 
-ƒ[ƒJƒ‹ƒT[ƒo‚ğ—§‚Ä‚ÄŒ‹‰Ê‚ğ‚İ‚Ä‚İ‚Ü‚·BFetch API ‚Í file URI Scheme ‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚È‚¢‚½‚ßAƒtƒ@ƒCƒ‹‚É http URI Scheme ‚ÅƒAƒNƒZƒX‚Å‚«‚é‚æ‚¤‚É‚·‚é•K—v‚ª‚ ‚é‚ç‚µ‚¢BGenerate JavaScript Using MATLAB Coder ‚É‚ÍŠÖ”‚ª—pˆÓ‚³‚ê‚Ä‚Ü‚·‚Ì‚Å‚±‚ê‚ğg‚¢‚Ü‚·B
+å…ˆã»ã© `.js` ã¨ `.wasm` ãŒå‡ºåŠ›ã•ã‚ŒãŸãƒ•ã‚©ãƒ«ãƒ€ dist ã« index.html ã‚’ç½®ãã¾ã™ã€‚MATLAB ä¸Šã§ dist ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã«ã—ã¦ã€
 
 
-  
-
-
-æ‚Ù‚Ç `.js` ‚Æ `.wasm` ‚ªo—Í‚³‚ê‚½ƒtƒHƒ‹ƒ_ dist ‚É index.html ‚ğ’u‚«‚Ü‚·BMATLAB ã‚Å dist ‚ğƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚É‚µ‚ÄA
-
-
-  
 ```matlab
 server = webcoder.utilities.DevelopmentServer("Port",8125)
 start(server);
 web('http://localhost:8125')
-% ƒT[ƒo‚ğ—‚Æ‚·‚Æ‚«‚Í
+% ã‚µãƒ¼ãƒã‚’è½ã¨ã™ã¨ãã¯
 % stop(server);
 ```
 
+Chrome ã§é–‹ã„ã¦ [Ctrl] + [Shift] + [i] ã§ä»¥ä¸‹ã®é€šã‚Šã€‚[Github Pages: MATLAB2WASM_sample](https://minoue-xx.github.io/MATLAB2WASM_sample/) ã§ã‚‚ç¢ºèªã§ãã¾ã™ã€‚
 
-Chrome ‚ÅŠJ‚¢‚Ä [Ctrl] + [Shift] + [i] ‚ÅˆÈ‰º‚Ì’Ê‚èB[Github Pages: MATLAB2WASM_sample](https://minoue-xx.github.io/MATLAB2WASM_sample/) ‚Å‚àŠm”F‚Å‚«‚Ü‚·B
-
-
-
-
-![image_2.png](MATLAB2WebAssembly_images/image_2.png)
+<p style="text-align:left"><img src="MATLAB2WebAssembly_media/image_2.png" width="528" alt="image_2.png"></p>
 
 
-  
+
+è¨ˆç®—ã¯ã§ãã¦ã„ã‚‹æ¨¡æ§˜ã€‚
 
 
-ŒvZ‚Í‚Å‚«‚Ä‚¢‚é–Í—lB
+åŒã˜è¨ˆç®—ã‚’ MATLAB ã§è©¦ã—ã«å®Ÿè¡Œã—ã¦ã¿ã‚‹ã¨ã€
 
 
-  
-
-
-“¯‚¶ŒvZ‚ğ MATLAB ‚Å‚µ‚ÉÀs‚µ‚Ä‚İ‚é‚ÆA
-
-
-  
 ```matlab
 target_pf = [0.275, 0.125, 0.2, 0.1, 0.1, 0.15, 0.05, 0, 0, 0];
 price = [155.83, 90.4, 42.78, 42.50, 142.56, 112.93, 39.23, 0, 0, 0];
@@ -296,9 +213,7 @@ position = [12, 20, 40, 15, 6, 18, 12, 0, 0, 0];
 xlong = getPosition2Add(target_pf, price, position)
 ```
 
-
-‚Å
-
+ã§
 
 ```matlab
 xlong =
@@ -308,36 +223,24 @@ xlong =
      0
 ```
 
+ã¨ãªã‚Šã€åŒã˜çµæœã§ã‚ã‚‹ã“ã¨ãŒåˆ†ã‹ã‚Šã¾ã™ã€‚ã‚ã§ãŸã—ã‚ã§ãŸã—ã€‚
 
-‚Æ‚È‚èA“¯‚¶Œ‹‰Ê‚Å‚ ‚é‚±‚Æ‚ª•ª‚©‚è‚Ü‚·B‚ß‚Å‚½‚µ‚ß‚Å‚½‚µB
+# ã¾ã¨ã‚
 
-
-  
-# ‚Ü‚Æ‚ß
-
-
-‚Ğ‚Æ‚Ü‚¸ MATLAB ‚Å‘‚¢‚½Å“K‰»ŒvZ‚ª JavaScript ‚©‚ç³‚µ‚­ŒÄ‚Ño‚¹‚Ä‚¢‚é‚±‚Æ‚ªŠm”F‚Å‚«‚Ü‚µ‚½B
+ã²ã¨ã¾ãš MATLAB ã§æ›¸ã„ãŸæœ€é©åŒ–è¨ˆç®—ãŒ JavaScript ã‹ã‚‰æ­£ã—ãå‘¼ã³å‡ºã›ã¦ã„ã‚‹ã“ã¨ãŒç¢ºèªã§ãã¾ã—ãŸã€‚
 
 
-  
+æ ªä¾¡ `price` ã‚„ä¿æœ‰æ•° `position` ã®å€¤ã‚‚é…åˆ—ã‚µã‚¤ã‚ºã‚‚æ±ºã‚æ‰“ã¡ãªçŠ¶æ³ã§ã€çµæœã‚‚ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã«è¡¨ç¤ºã™ã‚‹ã ã‘ã§ã™ã®ã§ã€ç¾çŠ¶ã§ã¯ã¾ã ä½¿ã„ç‰©ã«ãªã‚Šã¾ã›ã‚“ã€‚UIå‘¨ã‚Šã®ãŠåŒ–ç²§ã¯å¾Œã»ã©ã‚„ã£ã¦ã¿ã‚‹äºˆå®šã§ã™ã€‚
 
-
-Š”‰¿ `price` ‚â•Û—L” `position` ‚Ì’l‚à”z—ñƒTƒCƒY‚àŒˆ‚ß‘Å‚¿‚Èó‹µ‚ÅAŒ‹‰Ê‚àƒRƒ“ƒ\[ƒ‹‚É•\¦‚·‚é‚¾‚¯‚Å‚·‚Ì‚ÅAŒ»ó‚Å‚Í‚Ü‚¾g‚¢•¨‚É‚È‚è‚Ü‚¹‚ñBUIü‚è‚Ì‚¨‰»Ï‚ÍŒã‚Ù‚Ç‚â‚Á‚Ä‚İ‚é—\’è‚Å‚·B
-
-
-  
-## Ql
-
-   -  [Qiita: ”“Æƒ\ƒ‹ƒo[‚Åg‚¤‚±‚Æ‚ÅEmscripten‚Ìd‘g‚İ‚ğ’²‚×‚Ä‚İ‚½](https://qiita.com/bellbind/items/c37183dd4b7eb9949b9a) 
-   -  [yWebAssemblyzJS‘¤‚Åì¬‚µ‚½typed array‚ğwasm‘¤‚É“n‚·](http://blog.shogonir.jp/entry/2017/05/23/232600) 
+## å‚è€ƒ
+   -  [Qiita: æ•°ç‹¬ã‚½ãƒ«ãƒãƒ¼ã§ä½¿ã†ã“ã¨ã§Emscriptenã®ä»•çµ„ã¿ã‚’èª¿ã¹ã¦ã¿ãŸ](https://qiita.com/bellbind/items/c37183dd4b7eb9949b9a) 
+   -  [ã€WebAssemblyã€‘JSå´ã§ä½œæˆã—ãŸtyped arrayã‚’wasmå´ã«æ¸¡ã™](http://blog.shogonir.jp/entry/2017/05/23/232600) 
    -  [Guthub: Planeshifter/emscripten-examples](https://github.com/Planeshifter/emscripten-examples/tree/master/01_PassingArrays) 
    -  [MDN Web docs: JavaScript typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) 
-   -  [WebAssembly ŠJ”­ŠÂ‹«\’z‚Ì–{FWebAssembly “ü–å](https://wasm-dev-book.netlify.com/hello-wasm.html) 
+   -  [WebAssembly é–‹ç™ºç’°å¢ƒæ§‹ç¯‰ã®æœ¬ï¼šWebAssembly å…¥é–€](https://wasm-dev-book.netlify.com/hello-wasm.html) 
 
 
-
-“Á‚É [yWebAssemblyzJS‘¤‚Åì¬‚µ‚½typed array‚ğwasm‘¤‚É“n‚·](http://blog.shogonir.jp/entry/2017/05/23/232600)‚ÅŒöŠJ‚³‚ê‚Ä‚¢‚é‘½”‚Ì—á‘è‚à‘å•Ï‹Md‚¾‚Æv‚¢‚Ü‚·B•‚©‚è‚Ü‚µ‚½B‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B
-
+ç‰¹ã« [ã€WebAssemblyã€‘JSå´ã§ä½œæˆã—ãŸtyped arrayã‚’wasmå´ã«æ¸¡ã™](http://blog.shogonir.jp/entry/2017/05/23/232600)ã§å…¬é–‹ã•ã‚Œã¦ã„ã‚‹å¤šæ•°ã®ä¾‹é¡Œã‚‚å¤§å¤‰è²´é‡ã ã¨æ€ã„ã¾ã™ã€‚åŠ©ã‹ã‚Šã¾ã—ãŸã€‚ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚
 
 # Appendix 1. getPosition2Add.m
 ```matlab
@@ -357,36 +260,36 @@ price = price(idx);
 position = position(idx);
 N = sum(idx);
 
-% ‚»‚ê‚¼‚ê‚Ì–Á•¿‚¢‚­‚Âw“ü‚·‚ê‚Îƒ^[ƒQƒbƒg‚Æ‚·‚é•Û—LŠ„‡‚É‹ß‚Ã‚­‚©‚ğ‹‚ß‚Ü‚·B ‚»‚ÌÛ‚Ì§–ñ‚Í CostF‡Œv‰½ƒhƒ‹‚Ü‚Å‚Ìw“ü‚Æ‚·‚é‚© ‚±‚±‚Å‚Í 2k
-% (–ñ 20–œ‰~j‚Æ‚µ‚Ü‚·B
+% ãã‚Œãã‚Œã®éŠ˜æŸ„ã„ãã¤è³¼å…¥ã™ã‚Œã°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã™ã‚‹ä¿æœ‰å‰²åˆã«è¿‘ã¥ãã‹ã‚’æ±‚ã‚ã¾ã™ã€‚ ãã®éš›ã®åˆ¶ç´„ã¯ Costï¼šåˆè¨ˆä½•ãƒ‰ãƒ«ã¾ã§ã®è³¼å…¥ã¨ã™ã‚‹ã‹ ã“ã“ã§ã¯ 2k
+% (ç´„ 20ä¸‡å††ï¼‰ã¨ã—ã¾ã™ã€‚
 
 Cost = 2e3; % $2k
 
-% üŒ`•s“™®§–ñi‡ŒvƒRƒXƒg‚ª Cost ˆÈ‰ºj
+% ç·šå½¢ä¸ç­‰å¼åˆ¶ç´„ï¼ˆåˆè¨ˆã‚³ã‚¹ãƒˆãŒ Cost ä»¥ä¸‹ï¼‰
 A = price;
 b = Cost;
-% üŒ`“™®§–ñ‚Í‚È‚µ
+% ç·šå½¢ç­‰å¼åˆ¶ç´„ã¯ãªã—
 Aeq = [];
 beq = [];
-% w“ü”‚Ìã‰ºŒÀ
+% è³¼å…¥æ•°ã®ä¸Šä¸‹é™
 lb = zeros(1,N);
 ub = inf(1,N);
-% ‰Šú’l‚Í 0B
+% åˆæœŸå€¤ã¯ 0ã€‚
 x0 = zeros(1,N);
 
 options = optimoptions('fmincon','Algorithm','sqp');
 
-% –Ú“IŠÖ”‚Í getDiff ‚Å’è‹`‚³‚ê‚Ä‚¢‚Ü‚·B
-% ƒ^[ƒQƒbƒg‚Ì•Û—LŠ„‡‚Æ‚ÌŒë·“ñæ˜a•½•ûª‚ğÅ¬‚Æ‚·‚é‚±‚Æ‚ğ–Úw‚µ‚Ü‚·B
+% ç›®çš„é–¢æ•°ã¯ getDiff ã§å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚
+% ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¿æœ‰å‰²åˆã¨ã®èª¤å·®äºŒä¹—å’Œå¹³æ–¹æ ¹ã‚’æœ€å°ã¨ã™ã‚‹ã“ã¨ã‚’ç›®æŒ‡ã—ã¾ã™ã€‚
 objfun = @(x2add) getDiff(x2add,price,position,target_pf);
 x = fmincon(objfun,x0,A,b,Aeq,beq,lb,ub,[],options);
 
-% fmincon ‚ğg—p
-% –{—ˆ‚Í®”–â‘è‚Å‚·‚ªÀ”‚ÅŠ””‚ğ‹‚ß‚½ŒãA’[”‚Í–³‹‚µ‚Ü‚·B
-% w“üŠ””‚ª‘½‚¯‚ê‚Î‚»‚±‚Ü‚Å–â‘è‚É‚Í‚È‚ç‚È‚¢‚½‚ßB
-% ‚à‚¿‚ë‚ñw“üŠ””‚ª­‚È‚¢ê‡‚Í‰e‹¿‚ª‚ ‚é‚½‚ß’²®‚Ís‚Á‚Ä‚¢‚é‚İ‚½‚¢‚Å‚·‚ªA
-% ‚±‚Ì•û–@‚Íƒƒ{ƒAƒhƒoƒCƒU[ THEO ‚à“¯‚¶i—vˆø—pj
-% w“üŠ””‚Ì¬”“_ˆÈ‰ºØ‚èÌ‚Ä
+% fmincon ã‚’ä½¿ç”¨
+% æœ¬æ¥ã¯æ•´æ•°å•é¡Œã§ã™ãŒå®Ÿæ•°ã§æ ªæ•°ã‚’æ±‚ã‚ãŸå¾Œã€ç«¯æ•°ã¯ç„¡è¦–ã—ã¾ã™ã€‚
+% è³¼å…¥æ ªæ•°ãŒå¤šã‘ã‚Œã°ãã“ã¾ã§å•é¡Œã«ã¯ãªã‚‰ãªã„ãŸã‚ã€‚
+% ã‚‚ã¡ã‚ã‚“è³¼å…¥æ ªæ•°ãŒå°‘ãªã„å ´åˆã¯å½±éŸ¿ãŒã‚ã‚‹ãŸã‚èª¿æ•´ã¯è¡Œã£ã¦ã„ã‚‹ã¿ãŸã„ã§ã™ãŒã€
+% ã“ã®æ–¹æ³•ã¯ãƒ­ãƒœã‚¢ãƒ‰ãƒã‚¤ã‚¶ãƒ¼ THEO ã‚‚åŒã˜ï¼ˆè¦å¼•ç”¨ï¼‰
+% è³¼å…¥æ ªæ•°ã®å°æ•°ç‚¹ä»¥ä¸‹åˆ‡ã‚Šæ¨ã¦
 xlong = zeros(1,10);
 xlong(1:N) = floor(x);
 
@@ -398,10 +301,9 @@ newPF = newTotal/sum(newTotal);
 errorRMS = sqrt(sum( (newPF - target_pf).^2 ) );
 end
 ```
-  
-  
+
 # Appendix 1. index.html
-```matlab
+<pre>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -470,4 +372,4 @@ end
 </body>
 
 </html>
-```
+</pre>

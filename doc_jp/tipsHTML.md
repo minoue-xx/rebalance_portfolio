@@ -1,216 +1,117 @@
-# UI•ÒFMATLAB -> C++ -> WebAssembly ‚Ì©“®•ÏŠ·‚ğg‚Á‚½”ñüŒ`Å“K‰» on JavaScript
-# 0. ‚Í‚¶‚ß‚É
 
+# <span style="color:rgb(213,80,0)">UIç·¨ï¼šMATLAB -> C++ -> WebAssembly ã®è‡ªå‹•å¤‰æ›ã‚’ä½¿ã£ãŸéç·šå½¢æœ€é©åŒ– on JavaScript</span>
+# 0. ã¯ã˜ã‚ã«
 
-ˆÈ‘OAWebAssembly ‚ğ¶¬‚µ‚Ä MATLAB ‚Ì `fmincon` ‚ğƒuƒ‰ƒEƒUã‚ÅÀs‚·‚é˜b‚ğ‘‚«‚Ü‚µ‚½‚ªA¡‰ñ‚Í UI ü‚è‚ğì‚Á‚Ä‚İ‚½‚Ì‚Å‚²Ğ‰îB
+ä»¥å‰ã€WebAssembly ã‚’ç”Ÿæˆã—ã¦ MATLAB ã® `fmincon` ã‚’ãƒ–ãƒ©ã‚¦ã‚¶ä¸Šã§å®Ÿè¡Œã™ã‚‹è©±ã‚’æ›¸ãã¾ã—ãŸãŒã€ä»Šå›ã¯ UI å‘¨ã‚Šã‚’ä½œã£ã¦ã¿ãŸã®ã§ã”ç´¹ä»‹ã€‚
 
 
+äººå‰ã«å‡ºã›ã‚‹ã‚ˆã†ãªã‚³ãƒ¼ãƒ‰ã§ã¯ãªã„æ°—ã‚‚ã™ã‚‹ã‚“ã§ã™ãŒã€æŠ˜ã‚’è¦‹ã¦å¾ã€…ã«æ”¹è‰¯ã—ãŸã„ã®ã§ãƒ’ãƒ³ãƒˆãŒã‚ã‚Œã°ãœã²ã‚³ãƒ¡ãƒ³ãƒˆãã ã•ã„ã€‚å®œã—ããŠé¡˜ã„è‡´ã—ã¾ã™ã€‚
 
 
-l‘O‚Éo‚¹‚é‚æ‚¤‚ÈƒR[ƒh‚Å‚Í‚È‚¢‹C‚à‚·‚é‚ñ‚Å‚·‚ªAÜ‚ğŒ©‚Ä™X‚É‰ü—Ç‚µ‚½‚¢‚Ì‚Åƒqƒ“ƒg‚ª‚ ‚ê‚Î‚º‚ĞƒRƒƒ“ƒg‚­‚¾‚³‚¢B‹X‚µ‚­‚¨Šè‚¢’v‚µ‚Ü‚·B
+å®Ÿè¡Œãƒšãƒ¼ã‚¸ã¯ã“ã¡ã‚‰ï¼šGithub Pages: [Rebalance Portfolio](https://minoue-xx.github.io/rebalance_portfolio/)
 
 
+ã‚³ãƒ¼ãƒ‰ã“ã¡ã‚‰ã‹ã‚‰ï¼š GitHub: [minoue-xx/rebalance_portfolio](https://github.com/minoue-xx/rebalance_portfolio)
 
 
-Àsƒy[ƒW‚Í‚±‚¿‚çFGithub Pages: [Rebalance Portfolio](https://minoue-xx.github.io/rebalance_portfolio/)
+MATLAB -> WebAssembly ã®è‡ªå‹•å¤‰æ›éƒ¨åˆ†ã«ã¤ã„ã¦ã¯ã“ã¡ã‚‰ã®è¨˜äº‹ã‚’å‚ç…§ãã ã•ã„ã€‚
 
 
+[Qiita: MATLAB -> C++ -> WebAssembly ã®è‡ªå‹•å¤‰æ›ã‚’ä½¿ã£ãŸéç·šå½¢æœ€é©åŒ– on JavaScript](https://qiita.com/eigs/items/68cdcec7b8d56a5b440f)
 
+# 1. ç”¨é€”ã¨ä½¿ã„ã‹ãŸ
 
-ƒR[ƒh‚±‚¿‚ç‚©‚çF GitHub: [minoue-xx/rebalance_portfolio](https://github.com/minoue-xx/rebalance_portfolio)
+ç›®çš„ã¯ä¸€è²«ã—ã¦
 
 
+**ã€Œãƒãƒ©ãƒ³ã‚¹ãŒå´©ã‚ŒãŸä¿æœ‰å‰²åˆã‚’ç›®æ¨™å‰²åˆã«è¿‘ã¥ã‘ã‚‹ãŸã‚ã«ã¯å„éŠ˜æŸ„ã‚’ä½•æ ªè²·ãˆã°ã„ã„ã®ã‹ã€**
 
 
-MATLAB -> WebAssembly ‚Ì©“®•ÏŠ·•”•ª‚É‚Â‚¢‚Ä‚Í‚±‚¿‚ç‚Ì‹L–‚ğQÆ‚­‚¾‚³‚¢B
+ã¨ã„ã†ã“ã¨ã§ã™ãŒã€é¸æŠè‚¢ã¯ã€Œè²·ã†ã€ã®ã¿ã€‚ãƒªãƒãƒ©ãƒ³ã‚¹ã¨ã¯è¨€ã†ã‚‚ã®ã®å£²ã‚‹ã“ã¨ã¯è€ƒãˆã¦ã„ã¾ã›ã‚“ã€‚ç©ç«‹å‘ãï¼Ÿ
 
 
+ä»¥ä¸‹ã€æ“ä½œç”»é¢ï¼ˆGIFï¼‰ã§ã™ã€‚
 
+<p style="text-align:left"><img src="tipsHTML_media/image_0.gif" width="902" alt="image_0.gif"></p>
 
-[Qiita: MATLAB -> C++ -> WebAssembly ‚Ì©“®•ÏŠ·‚ğg‚Á‚½”ñüŒ`Å“K‰» on JavaScript](https://qiita.com/eigs/items/68cdcec7b8d56a5b440f)
 
+ã“ã‚“ãªæ„Ÿã˜ã€‚
 
-  
-# 1. —p“r‚Æg‚¢‚©‚½
 
+**Step 1: ç¾åœ¨ã®ãƒãƒ¼ãƒˆãƒ•ã‚©ãƒªã‚ªè¡¨ç¤º**
 
-–Ú“I‚ÍˆêŠÑ‚µ‚Ä
 
+ä¿æœ‰éŠ˜æŸ„ãƒ»æ•°ã¯ csv ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿ã¾ã™ã€‚è©¦ã—ã«ã‚µãƒ³ãƒ—ãƒ«ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰é–‹å§‹ã—ã¦ã‚‚ã‚ˆã—ã€‚
 
 
+ç¾åœ¨ä¾¡æ ¼ã‚„å°è¨ˆãƒ»åˆè¨ˆãƒ»å‰²åˆã¯è‡ªå‹•è¨ˆç®—ã—ã¾ã™ã€‚å¿…è¦ãŒã‚ã‚Œã°éŠ˜æŸ„ãƒ»ä¿æœ‰æ•°ãªã©å¤‰æ›´ã—ã¦ã¿ã¦ãã ã•ã„ã€‚csv ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ä»¥ä¸‹ã®æ§˜ã«ã—ã¦ãã ã•ã„ã€‚[Ticker],[ä¿æœ‰æ•°],[ç›®æ¨™ä¿æœ‰å‰²åˆ]ã®é †ã€‚
 
-**uƒoƒ‰ƒ“ƒX‚ª•ö‚ê‚½•Û—LŠ„‡‚ğ–Ú•WŠ„‡‚É‹ß‚Ã‚¯‚é‚½‚ß‚É‚ÍŠe–Á•¿‚ğ‰½Š””ƒ‚¦‚Î‚¢‚¢‚Ì‚©v**
 
+**Step 2: äºˆç®—é¡å…¥åŠ›**
 
 
+ä½¿ãˆã‚‹é¡ã‚’å…¥åŠ›ã—ã¦ [Rebalance]ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã€‚
 
-‚Æ‚¢‚¤‚±‚Æ‚Å‚·‚ªA‘I‘ğˆ‚Íu”ƒ‚¤v‚Ì‚İBƒŠƒoƒ‰ƒ“ƒX‚Æ‚ÍŒ¾‚¤‚à‚Ì‚Ì”„‚é‚±‚Æ‚Íl‚¦‚Ä‚¢‚Ü‚¹‚ñBÏ—§Œü‚«H
 
+**Step 3: å¿…è¦è³¼å…¥æ•°ã‚’è¨ˆç®—ãƒ»çµæœè¡¨ç¤º**
 
 
+Target% (ç›®çš„ã®ä¿æœ‰å‰²åˆ) ã«è¿‘ã¥ãã¾ã—ãŸã­ã€‚
 
-ˆÈ‰ºA‘€ì‰æ–ÊiGIFj‚Å‚·B
+# 2. ä½¿ç”¨ã—ãŸç´°ã‹ã„è¦ç´ ã«ã¤ã„ã¦
 
+JavaScript ã¯åˆã‚ã¦ã ã£ãŸã®ã§æ¤œç´¢ã—ãªãŒã‚‰ï¼‹åŒåƒšã«ãƒ’ãƒ³ãƒˆã‚’ã‚‚ã‚‰ã£ã¦æ§‹ç¯‰ã—ã¾ã—ãŸã€‚ã‚„ã£ã¦ã„ã‚‹ã“ã¨ã¯åŸºæœ¬çš„ãªã“ã¨ã ã¨ï¼ˆï¼Ÿï¼‰æ€ã„ã¾ã™ã®ã§ã€ä»Šå›å¤§å¤‰å‚è€ƒãƒ»å‹‰å¼·ã«ãªã£ãŸæƒ…å ±ã‚’ä¸¦ã¹ã¦ãŠãã¾ã™ã€‚**0.** [**Finantial Modeling Prep**](https://financialmodelingprep.com/)
 
 
+ç„¡æ–™ï¼‹èªè¨¼ä¸è¦ã¨ã„ã†æ¡ä»¶ã§æ¢ã—ã¦ã€æ ªä¾¡æƒ…å ±ã¯ã“ã“ã® API ã‚’ä½¿ã„ã¾ã—ãŸã€‚
 
-![image_0.png](tipsHTML_images/image_0.png)
 
+ï¼ˆç„¡æ–™APIä¸€è¦§ï¼š[https://github.com/public-apis/public-apisï¼‰](https://github.com/public-apis/public-apis%EF%BC%89)
 
 
+1. [Qiita: letã¨varã®é•ã„](https://qiita.com/y-temp4/items/289686fbdde896d22b5e)
 
-‚±‚ñ‚ÈŠ´‚¶B
 
-
-  
-
-
-**Step 1: Œ»İ‚Ìƒ|[ƒgƒtƒHƒŠƒI•\¦**
-
-
-
-
-•Û—L–Á•¿E”‚Í csv ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ‚Ü‚·B‚µ‚ÉƒTƒ“ƒvƒ‹ƒf[ƒ^‚©‚çŠJn‚µ‚Ä‚à‚æ‚µB
-
-
-
-
-Œ»İ‰¿Ši‚â¬ŒvE‡ŒvEŠ„‡‚Í©“®ŒvZ‚µ‚Ü‚·B•K—v‚ª‚ ‚ê‚Î–Á•¿E•Û—L”‚È‚Ç•ÏX‚µ‚Ä‚İ‚Ä‚­‚¾‚³‚¢Bcsv ƒtƒ@ƒCƒ‹‚ÌƒtƒH[ƒ}ƒbƒg‚ÍˆÈ‰º‚Ì—l‚É‚µ‚Ä‚­‚¾‚³‚¢B[Ticker],[•Û—L”],[–Ú•W•Û—LŠ„‡]‚Ì‡B
-
-
-  
-
-
-**Step 2: —\ZŠz“ü—Í**
-
-
-
-
-g‚¦‚éŠz‚ğ“ü—Í‚µ‚Ä [Rebalance]ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒNB
-
-
-  
-
-
-**Step 3: •K—vw“ü”‚ğŒvZEŒ‹‰Ê•\¦**
-
-
-
-
-Target\% (–Ú“I‚Ì•Û—LŠ„‡) ‚É‹ß‚Ã‚«‚Ü‚µ‚½‚ËB
-
-
-  
-# 2. g—p‚µ‚½×‚©‚¢—v‘f‚É‚Â‚¢‚Ä
-
-
-JavaScript ‚Í‰‚ß‚Ä‚¾‚Á‚½‚Ì‚ÅŒŸõ‚µ‚È‚ª‚ç{“¯—»‚Éƒqƒ“ƒg‚ğ‚à‚ç‚Á‚Ä\’z‚µ‚Ü‚µ‚½B‚â‚Á‚Ä‚¢‚é‚±‚Æ‚ÍŠî–{“I‚È‚±‚Æ‚¾‚ÆiHjv‚¢‚Ü‚·‚Ì‚ÅA¡‰ñ‘å•ÏQlE•×‹­‚É‚È‚Á‚½î•ñ‚ğ•À‚×‚Ä‚¨‚«‚Ü‚·B**0.**** **[**Finantial Modeling Prep**](https://financialmodelingprep.com/)
-
-
-
-
-–³—¿{”FØ•s—v‚Æ‚¢‚¤ğŒ‚Å’T‚µ‚ÄAŠ”‰¿î•ñ‚Í‚±‚±‚Ì API ‚ğg‚¢‚Ü‚µ‚½B
-
-
-
-
-i–³—¿APIˆê——F[https://github.com/public-apis/public-apisj](https://github.com/public-apis/public-apis%EF%BC%89)
-
-
-  
-
-
-1. [Qiita: let‚Ævar‚Ìˆá‚¢](https://qiita.com/y-temp4/items/289686fbdde896d22b5e)
-
-
-
-
-‚Ü‚¸‚Í‚±‚êB‚¢‚ë‚ñ‚È•û‚ÌƒR[ƒh‚ğƒRƒsƒy‚µ‚½‚Ì‚ÅAvar ‚Æ let ‚ª¬İ‚µ‚Ä‚¢‚Ü‚µ‚½Blet ‚É“ˆê‚·‚éÛ‚ÉA’m‚ç‚È‚©‚Á‚½ƒXƒR[ƒv‚Ìˆá‚¢‚ÅƒGƒ‰[‚ª‹N‚±‚é‚È‚Ç‚µ‚Ä‚¢‚½Û‚ÉQl‚É‚È‚è‚Ü‚µ‚½B
-
-
-  
+ã¾ãšã¯ã“ã‚Œã€‚ã„ã‚ã‚“ãªæ–¹ã®ã‚³ãƒ¼ãƒ‰ã‚’ã‚³ãƒ”ãƒšã—ãŸã®ã§ã€var ã¨ let ãŒæ··åœ¨ã—ã¦ã„ã¾ã—ãŸã€‚let ã«çµ±ä¸€ã™ã‚‹éš›ã«ã€çŸ¥ã‚‰ãªã‹ã£ãŸã‚¹ã‚³ãƒ¼ãƒ—ã®é•ã„ã§ã‚¨ãƒ©ãƒ¼ãŒèµ·ã“ã‚‹ãªã©ã—ã¦ã„ãŸéš›ã«å‚è€ƒã«ãªã‚Šã¾ã—ãŸã€‚
 
 
 2. [Using jQuery to Perform Calculations in a Table](https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows)
 
 
+ä»Šå›ã®ãƒšãƒ¼ã‚¸æ§‹æˆã®ãƒ™ãƒ¼ã‚¹ã«ãªã£ã¦ã„ã¾ã™ã€‚
 
 
-¡‰ñ‚Ìƒy[ƒW\¬‚Ìƒx[ƒX‚É‚È‚Á‚Ä‚¢‚Ü‚·B
+3. [ã€jQueryå…¥é–€ã€‘find()ã§å­è¦ç´ ã‚’å–å¾—ã™ã‚‹æ‰‹æ³•ã¾ã¨ã‚ï¼](https://www.sejuku.net/blog/37474)
 
 
-  
-
-
-3. [yjQuery“ü–åzfind()‚Åq—v‘f‚ğæ“¾‚·‚éè–@‚Ü‚Æ‚ßI](https://www.sejuku.net/blog/37474)
-
-
-
-
-ã‚ğ—‰ğ‚·‚é‚Ì‚É•‚©‚è‚Ü‚µ‚½Bclass‘®«‚Å‚ ‚ê‚Îu. vAid‘®«‚Å‚ ‚ê‚Îu\#vB
-
-
-  
+ä¸Šã‚’ç†è§£ã™ã‚‹ã®ã«åŠ©ã‹ã‚Šã¾ã—ãŸã€‚classå±æ€§ã§ã‚ã‚Œã°ã€Œ. ã€ã€idå±æ€§ã§ã‚ã‚Œã°ã€Œ#ã€ã€‚
 
 
 4. [Read CSV File in jQuery using HTML5 File API](https://www.aspsnippets.com/Articles/Read-CSV-File-in-jQuery-using-HTML5-File-API.aspx)
 
 
-
-
-csv ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ•”•ª‚ÍA‚Ù‚Ú‚±‚¿‚ç‚ÌƒRƒsƒyB
-
-
-  
+csv ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿éƒ¨åˆ†ã¯ã€ã»ã¼ã“ã¡ã‚‰ã®ã‚³ãƒ”ãƒšã€‚
 
 
 5. [How to convert a currency string to a double with jQuery or Javascript? - Stack Overflow](https://stackoverflow.com/questions/559112/how-to-convert-a-currency-string-to-a-double-with-jquery-or-javascript)
 
 
+é‡‘é¡ã®è¡¨ç¤ºã£ã¦çµæ§‹é¢å€’ãã•ã„ã€‚
 
-
-‹àŠz‚Ì•\¦‚Á‚ÄŒ‹\–Ê“|‚­‚³‚¢B
-
-
-```matlab
-(12345.67).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
-```
-
-
-‚ğg‚í‚¹‚Ä‚à‚ç‚¢‚Ü‚µ‚½B
-
-
-  
-
-
-6. [How can I format numbers as currency string in JavaScript? - Stack Overflow](https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-currency-string-in-javascript)
-
-
-
-
-‹àŠz•\¦‚©‚ç”’l‚É–ß‚·•”•ª‚ÍˆÈ‰º‚ÅB
-
-
-```matlab
-var currency = "$123,456.00";
+<pre>
+(12345.67).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, ' $&,');  // 12,345.67\end{verbatim}\begin{par}\begin{flushleft}ã‚’ä½¿ã‚ã›ã¦ã‚‚ã‚‰ã„ã¾ã—ãŸã€‚\end{flushleft}\end{par}\begin{par}\begin{flushleft}6. \href{https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-currency-string-in-javascript}{How can I format numbers as currency string in JavaScript? - Stack Overflow}\end{flushleft}\end{par}\begin{par}\begin{flushleft}é‡‘é¡è¡¨ç¤ºã‹ã‚‰æ•°å€¤ã«æˆ»ã™éƒ¨åˆ†ã¯ä»¥ä¸‹ã§ã€‚\end{flushleft}\end{par}\begin{verbatim}var currency = "$ 123,456.00";
 var number = Number(currency.replace(/[^0-9\.]+/g,""));
-```
-  
-  
-# 3. ‚³‚¢‚²‚É: WebAssembly ‰»‚µ‚½ MATLAB ƒR[ƒh
+</pre>
+
+# 3. ã•ã„ã”ã«: WebAssembly åŒ–ã—ãŸ MATLAB ã‚³ãƒ¼ãƒ‰
+
+[Qiita: MATLAB -> C++ -> WebAssembly ã®è‡ªå‹•å¤‰æ›ã‚’ä½¿ã£ãŸéç·šå½¢æœ€é©åŒ– on JavaScript](https://qiita.com/eigs/items/68cdcec7b8d56a5b440f)ã€€ã§ç´¹ä»‹ã—ãŸã‚‚ã®ã¨ã»ã¼åŒã˜ã§ã™ãŒã€
+
+1.  `budget` äºˆç®—é¡ï¼ˆã‚¹ã‚«ãƒ©ãƒ¼å€¤ï¼‰ã‚’å…¥åŠ›ã¨ã—ã¦è¿½åŠ 
+2. åˆæœŸå€¤ã¯äºˆç®—é¡ã‚’ç›®çš„ä¿æœ‰å‰²åˆã§åˆ†é…ã—ãŸå€¤ã‚’ä½¿ç”¨
 
 
-[Qiita: MATLAB -> C++ -> WebAssembly ‚Ì©“®•ÏŠ·‚ğg‚Á‚½”ñüŒ`Å“K‰» on JavaScript](https://qiita.com/eigs/items/68cdcec7b8d56a5b440f)@‚ÅĞ‰î‚µ‚½‚à‚Ì‚Æ‚Ù‚Ú“¯‚¶‚Å‚·‚ªA
-
-
-
-   1.  `budget` —\ZŠziƒXƒJƒ‰[’lj‚ğ“ü—Í‚Æ‚µ‚Ä’Ç‰Á 
-   1.  ‰Šú’l‚Í—\ZŠz‚ğ–Ú“I•Û—LŠ„‡‚Å•ª”z‚µ‚½’l‚ğg—p 
-
-
-
-‚Ì2“_‚ğ•ÏX‚µ‚Ä‚¢‚Ü‚·BŒ‹‰Ê‚ª‰Šú’l‚ÉˆË‘¶i‹ÇŠ‰ğ‚ğo‚µ‚Äj‚µ‚Ü‚¤“_‚É‚Â‚¢‚Ä‚ÍA‚Ü‚½‘‚¢‚Ä‚İ‚Ü‚·B
-
+ã®2ç‚¹ã‚’å¤‰æ›´ã—ã¦ã„ã¾ã™ã€‚çµæœãŒåˆæœŸå€¤ã«ä¾å­˜ï¼ˆå±€æ‰€è§£ã‚’å‡ºã—ã¦ï¼‰ã—ã¾ã†ç‚¹ã«ã¤ã„ã¦ã¯ã€ã¾ãŸæ›¸ã„ã¦ã¿ã¾ã™ã€‚
 
 # Appendix: getPosition2Add.m
 ```matlab
@@ -232,41 +133,42 @@ price = price(idx);
 position = position(idx);
 N = sum(idx);
 
-% ‚»‚ê‚¼‚ê‚Ì–Á•¿‚¢‚­‚Âw“ü‚·‚ê‚Îƒ^[ƒQƒbƒg‚Æ‚·‚é•Û—LŠ„‡‚É‹ß‚Ã‚­‚©‚ğ‹‚ß‚Ü‚·B
-%@‚»‚ÌÛ‚Ì§–ñ‚Í CostF‡Œv‰½ƒhƒ‹‚Ü‚Å‚Ìw“ü‚Æ‚·‚é‚©
+% ãã‚Œãã‚Œã®éŠ˜æŸ„ã„ãã¤è³¼å…¥ã™ã‚Œã°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã™ã‚‹ä¿æœ‰å‰²åˆã«è¿‘ã¥ãã‹ã‚’æ±‚ã‚ã¾ã™ã€‚
+%ã€€ãã®éš›ã®åˆ¶ç´„ã¯ Costï¼šåˆè¨ˆä½•ãƒ‰ãƒ«ã¾ã§ã®è³¼å…¥ã¨ã™ã‚‹ã‹
 Cost = budget(1);
 
-% üŒ`•s“™®§–ñ‚È‚µ
+% ç·šå½¢ä¸ç­‰å¼åˆ¶ç´„ãªã—
 A = [];
 b = [];
-% üŒ`“™®§–ñi‡ŒvƒRƒXƒg‚ª Cost j
+% ç·šå½¢ç­‰å¼åˆ¶ç´„ï¼ˆåˆè¨ˆã‚³ã‚¹ãƒˆãŒ Cost ï¼‰
 % Aeq = [];
 % beq = [];
 Aeq = price;
 beq = Cost;
-% w“ü”‚Ìã‰ºŒÀ
+% è³¼å…¥æ•°ã®ä¸Šä¸‹é™
 lb = zeros(1,N);
 ub = inf(1,N);
-% ‰Šú’l‚Í Cost ‚ğ target_pf ‚ÅŠ„‚èU‚Á‚½Û‚Ì’l‚ğg—p
+% åˆæœŸå€¤ã¯ Cost ã‚’ target_pf ã§å‰²ã‚ŠæŒ¯ã£ãŸéš›ã®å€¤ã‚’ä½¿ç”¨
 x0 = Cost*target_pf./(price);
 
 options = optimoptions('fmincon','Algorithm','sqp');
 
-% –Ú“IŠÖ”‚Í getDiff ‚Å’è‹`‚³‚ê‚Ä‚¢‚Ü‚·B
-% ƒ^[ƒQƒbƒg‚Ì•Û—LŠ„‡‚Æ‚ÌŒë·“ñæ˜a•½•ûª‚ğÅ¬‚Æ‚·‚é‚±‚Æ‚ğ–Úw‚µ‚Ü‚·B
+% ç›®çš„é–¢æ•°ã¯ getDiff ã§å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚
+% ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¿æœ‰å‰²åˆã¨ã®èª¤å·®äºŒä¹—å’Œå¹³æ–¹æ ¹ã‚’æœ€å°ã¨ã™ã‚‹ã“ã¨ã‚’ç›®æŒ‡ã—ã¾ã™ã€‚
 objfun = @(x2add) getDiff(x2add,price,position,target_pf);
 x = fmincon(objfun,x0,A,b,Aeq,beq,lb,ub,[],options);
 
-% fmincon ‚ğg—p
-% –{—ˆ‚Í®”–â‘è‚Å‚·‚ªÀ”‚ÅŠ””‚ğ‹‚ß‚½ŒãA’[”‚Í–³‹‚µ‚Ü‚·B
-% w“üŠ””‚ª‘½‚¯‚ê‚Î‚»‚±‚Ü‚Å–â‘è‚É‚Í‚È‚ç‚È‚¢‚½‚ß
-% w“üŠ””‚Ì¬”“_ˆÈ‰ºØ‚èÌ‚Ä
+% fmincon ã‚’ä½¿ç”¨
+% æœ¬æ¥ã¯æ•´æ•°å•é¡Œã§ã™ãŒå®Ÿæ•°ã§æ ªæ•°ã‚’æ±‚ã‚ãŸå¾Œã€ç«¯æ•°ã¯ç„¡è¦–ã—ã¾ã™ã€‚
+% è³¼å…¥æ ªæ•°ãŒå¤šã‘ã‚Œã°ãã“ã¾ã§å•é¡Œã«ã¯ãªã‚‰ãªã„ãŸã‚
+% è³¼å…¥æ ªæ•°ã®å°æ•°ç‚¹ä»¥ä¸‹åˆ‡ã‚Šæ¨ã¦
 xlong = zeros(1,10);
 xlong(1:N) = floor(x);
 
 end
 
 ```
+
 ```matlab
 function errorRMS = getDiff(position2add,marketvalue,position,target_pf)
 newTotal = marketvalue.*(position2add+position);
