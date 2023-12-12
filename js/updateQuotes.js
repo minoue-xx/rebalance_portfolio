@@ -177,9 +177,9 @@ function hogehoge_ticker($tblrow) {
 //  });
 
     $.ajax(settings).done(function (response) {
-        console.log(response[0].regularMarketPrice);
+        console.log(response.body[0].regularMarketPrice);
 
-        const price = response[0].regularMarketPrice;
+        const price = response.body[0].regularMarketPrice;
         if (price) {
         $tblrow.find(".price").val("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,"));
 
