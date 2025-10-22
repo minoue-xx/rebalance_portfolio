@@ -13,44 +13,199 @@ https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-currency-
 Using jQuery to Perform Calculations in a Table
 https://www.dotnetcurry.com/jquery/1189/jquery-table-calculate-sum-all-rows
 -->
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Rebalancing Portofolio (Under Development)</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta charset="UTF-8" />
+  <title>Rebalance Portfolio</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="js/optimizeposition.js"></script>
+  <script src="js/getPosition2Add.js"></script>
+  <script src="js/makeTable.js"></script>
+  <script src="js/updateQuotes.js"></script>
+  <script src="js/onLoad.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #e8ecf2 0%, #f6f7fa 100%);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #1f3c88;
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8em;
+      letter-spacing: 0.03em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #1f3c88;
+      border-left: 5px solid #1f3c88;
+      padding-left: 10px;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    a {
+      color: #1f3c88;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 4px 0;
+      width: 60%;
+    }
+
+    input[type="button"] {
+      background: #1f3c88;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px 4px;
+      transition: 0.2s;
+    }
+    input[type="button"]:hover {
+      background: #274fb8;
+    }
+
+    /* --- セクション全体 --- */
+    #dvCurrent, #dvBudget, #dvVirtual {
+      background: #f5f7fb;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 15px;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.05);
+    }
+
+    /* --- テーブルの密度を上げる --- */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+    }
+    th {
+      text-align: center;
+      background: #f0f2f8;
+      font-weight: 600;
+    }
+
+    /* --- サマリー（合計値など）を強調 --- */
+    .summary-table {
+      margin-top: 15px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #eef1f7, #f9fafc);
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.05);
+      border: 1px solid #d0d5e0;
+    }
+    .summary-table td, .summary-table th {
+      padding: 8px 10px;
+      border: none;
+      font-weight: 600;
+      color: #1f3c88;
+    }
+
+    /* --- Upload ボタン関連 --- */
+    .upload-section {
+      margin-top: 10px;
+    }
+    .upload-section input[type="file"] {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 60px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
 
 <body>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script type="text/javascript" src="js/optimizeposition.js"></script>
-  <script type="text/javascript" src="js/getPosition2Add.js"></script>
-  <script type="text/javascript" src="js/makeTable.js"></script>
-  <script type="text/javascript" src="js/updateQuotes.js"></script>
-  <script type="text/javascript" src='js/onLoad.js'></script>
-  <!--ref on async/defer/defaut: https://qiita.com/phanect/items/82c85ea4b8f9c373d684-->
+  <header>
+    <h1>Rebalance Portfolio</h1>
+    <p style="margin: 4px 0 0;">Optimize your investments with real-time market data</p>
+  </header>
 
-  <h1>Rebalance Portfolio</h1>
-  <hr />
-  <h3>1. Your current Portofolio</h3>
-  <p> The latest prices (15 mins delay) are provided by Yahoo Finance at Rapid API (<a href="https://rapidapi.com/sparior/api/yahoo-finance15">LINK</a>). <br>
-    Please provide your API key below to access its service (Free plan is also available)
-  <form name="form1" id="id_form1">
-    <td align="right"><b> API key：</b></td>
-    <td><input type="text" id="id_key" name="apikey" size="50" maxlength="50"></td>
-  </form>
-  </p>
-  <input type="file" id="fileUpload" />
-  <input type="button" id="upload" value="Upload" />
-  <input type="button" id="uploadSampleData" value="Upload sample data" />
-  <input type="button" id="addrow" value="Add a new row" />
-  <input type="button" id="deleterow" value="Delete the last row" />
-  <div id="dvCurrent"></div>
-  <p id="updated_at"></p>
+  <main>
+    <h3>1. Your Current Portfolio</h3>
+    <p>
+      The latest prices (15 min delay) are provided by Yahoo Finance at Rapid API
+      (<a href="https://rapidapi.com/sparior/api/yahoo-finance15" target="_blank">LINK</a>).<br>
+      Please provide your API key below to access its service (Free plan available).
+    </p>
 
-  <h3>2. Setting your Budget</h3>
-  <input type="button" id="runfmincon" value="Rebalance" />
-  <div id="dvBudget"></div>
+    <form id="id_form1">
+      <label for="id_key"><b>API key:</b></label><br>
+      <input type="text" id="id_key" name="apikey" maxlength="50">
+    </form>
 
-  <h3>3. Your virtual Portofolio</h3>
-  <div id="dvVirtual"></div>
+    <div class="upload-section">
+      <input type="file" id="fileUpload" />
+      <input type="button" id="upload" value="Upload" />
+      <input type="button" id="uploadSampleData" value="Upload sample data" />
+      <input type="button" id="addrow" value="Add a new row" />
+      <input type="button" id="deleterow" value="Delete last row" />
+    </div>
 
+    <div id="dvCurrent"></div>
+    <p id="updated_at"></p>
+
+    <h3>2. Set Your Budget</h3>
+    <div id="dvBudget"></div>
+    <!-- Rebalance ボタンを予算設定欄の下に移動 -->
+    <div style="margin-top: 15px;">
+      <input type="button" id="runfmincon" value="Rebalance" />
+    </div>
+
+    <h3>3. Your Virtual Portfolio</h3>
+    <div id="dvVirtual"></div>
+  </main>
+
+  <footer>
+    &copy; 2019–2025 Michio Inoue
+  </footer>
 </body>
-</head>
+</html>
+
+
